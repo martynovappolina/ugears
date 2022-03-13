@@ -1,0 +1,30 @@
+.category {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 1200px;
+    width: 400px;
+    border: 1px solid black;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform: rotate(-90deg) translateY(-835px);
+    transform-origin: right top;
+
+    &__title {
+        position: sticky;
+        width: 250px;
+        height: 35px;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-radius: 0px 0px 15px 0px;
+        left: 200px;
+        top: 250px;
+        text-align: center;
+        font-size: 30px;
+
+        transform: rotate(90deg);
+        transform-origin: right top;
+    }
+}
