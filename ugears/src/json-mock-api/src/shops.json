@@ -1,0 +1,34 @@
+{
+    "shops": [
+        {
+            "id": 1,
+            "title": "Ugears",
+            "description": "Официальный дилер Ugears",
+            "address": "г. Москва, м. Таганская, ул. Большие Каменщики, д. 6, стр. 1",
+            "managers_list": [
+                {
+                    "id": 1,
+                    "name": "Иванов",
+                    "last_name": "Иван",
+                    "login": "ivanov",
+                    "password": "123",
+                    "is_manager": true,
+                    "is_admin": false,
+                    "phone_number": "89465738475",
+                    "mail": "ivanov@mail.ru"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Петров",
+                    "last_name": "Петр",
+                    "login": "petrov",
+                    "password": "123",
+                    "is_manager": true,
+                    "is_admin": false,
+                    "phone_number": "89465128475",
+                    "mail": "petrov@mail.ru"
+                  }
+            ] 
+        }
+    ]
+}

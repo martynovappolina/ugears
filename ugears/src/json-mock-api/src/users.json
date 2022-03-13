@@ -1,0 +1,60 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "last_name": "Иванов",
+        "name": "Иван",
+        "login": "ivanov",
+        "password": "123",
+        "is_manager": true,
+        "is_admin": false,
+        "phone_number": "89465738475",
+        "mail": "ivanov@mail.ru"
+      },
+      {
+        "id": 2,
+        "last_name": "Петров",
+        "name": "Петр",
+        "login": "petrov",
+        "password": "123",
+        "is_manager": true,
+        "is_admin": false,
+        "phone_number": "89465128475",
+        "mail": "petrov@mail.ru"
+      },
+      {
+        "id": 3,
+        "last_name": "Сидоров",
+        "name": "Сидр",
+        "login": "sidoroff",
+        "password": "123",
+        "is_manager": false,
+        "is_admin": true,
+        "phone_number": "89465098475",
+        "mail": "sidoroff@mail.ru"
+      },
+      {
+        "id": 4,
+        "last_name": "Раскольников",
+        "name": "Иван",
+        "login": "rascolnicov",
+        "password": "123",
+        "is_manager": true,
+        "is_admin": false,
+        "phone_number": "83265738475",
+        "mail": "rascolnicov@mail.ru"
+      },
+      {
+        "id": 5,
+        "last_name": "Иванов",
+        "name": "Иван",
+        "login": "ivanov2",
+        "password": "123",
+        "is_manager": false,
+        "is_admin": false,
+        "phone_number": "89465738475",
+        "mail": "ivanov2@mail.ru"
+      }
+
+    ]
+  }

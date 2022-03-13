@@ -1,0 +1,34 @@
+.product {
+    height: 320px;
+    width: 270px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transform: rotate(90deg) translateX(240px);
+    transform-origin: right top;
+
+    &__Info{
+        display: flex;
+        flex-direction: column;
+        width: 240px;
+    }
+    &__Title{
+        width: 260px;
+        font-size: 17px;
+        font-weight: bold;
+    }
+    &__Price{
+        font-size: 18px;
+    }
+    &__Text1{
+        display: flex;
+        flex-direction: row;
+        font-size: 14px;
+        color: grey;
+    }
+    &__Text2{
+        font-size: 14px;
+        color: black;
+    }
+}
+
