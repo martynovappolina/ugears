@@ -1,11 +1,12 @@
 .product {
     height: 320px;
-    width: 270px;
+    width: 325px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    transform: rotate(90deg) translateX(240px);
+    transform: rotate(90deg) translateX(260px);
     transform-origin: right top;
+    position: relative;
 
     &__Info{
         display: flex;
@@ -29,6 +30,30 @@
     &__Text2{
         font-size: 14px;
         color: black;
+    }
+    &__Star {
+        width: 10px;
+        height: 10px;
+    }
+
+    &__Favorites {
+        position: absolute;
+        bottom: 40px;
+        right: 70px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__Basket {
+        position: absolute;
+        bottom: 0px;
+        right: 35px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 

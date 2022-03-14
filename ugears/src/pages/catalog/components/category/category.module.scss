@@ -3,19 +3,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 1200px;
+    height: 1250px;
     width: 400px;
     border: 1px solid black;
 
     overflow-y: auto;
     overflow-x: hidden;
-    transform: rotate(-90deg) translateY(-835px);
+    transform: rotate(-90deg) translateY(-515px);
     transform-origin: right top;
 
     &__title {
         position: sticky;
         width: 250px;
-        height: 35px;
+        height: 32px;
         border-right: 1px solid black;
         border-bottom: 1px solid black;
         border-radius: 0px 0px 15px 0px;
