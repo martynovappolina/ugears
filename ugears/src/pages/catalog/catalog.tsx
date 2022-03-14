@@ -32,9 +32,14 @@ const Catalog = () => {
         }
         <div className={catalogStyle.catalog}>
           <Category category="Механизмы"/>
+        </div>
+        <div className={catalogStyle.catalog}>
           <Category category="Машины"/>
+        </div>
+        <div className={catalogStyle.catalog}>
           <Category category="Поезда"/>
         </div>
+        
       </Provider>
     )
 }

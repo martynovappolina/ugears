@@ -1,10 +1,14 @@
 import Catalog from "../pages/catalog";
 
 import './App.scss'
+import Header from "./components/header";
 
 const App = () => {
   return (
-    <Catalog />
+    <>
+      <Header />
+      <Catalog />
+    </>
   );
 }
 
