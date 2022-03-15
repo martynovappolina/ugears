@@ -6,6 +6,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    position: sticky;
 
     &__ugears {
         width: 120px;
@@ -19,7 +20,7 @@
 
     &__link {
         margin: 10px;
-        font-size: 22px;
+        font-size: 19px;;
 
         &:hover {
             cursor: pointer;
