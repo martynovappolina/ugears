@@ -21,7 +21,7 @@ const Catalog = () => {
             } catch (err) {}
           };
         getData();         
-    }, [productsListStore]);
+    }, []);
     
     useEffect(() => getProducts(), []) 
     
