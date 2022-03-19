@@ -118,13 +118,6 @@
         color: #333;
     }
 
-    &__input {
-        width: 100%;
-        padding: 10px;
-        border: solid 1px #333;
-        font-size: inherit;
-    }
-
     &__button {
         border: none;
         cursor: pointer;
@@ -140,6 +133,12 @@
     }
 
     &__forgot {
+        color: #333;
+    }
+
+    &__text {
+        width: 100%;
+        text-align: center;
         color: #333;
     }
 }

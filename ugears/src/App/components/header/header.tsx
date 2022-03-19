@@ -13,7 +13,7 @@ const Header = () => {
     return (
         <div className={headerStyle.header}>
             <NavLink className={headerStyle.header__ugears} to={"/"}/>
-            <NavLink className={headerStyle.header__link} style={{ textDecoration: 'none', color: 'black' }} to={"/catalog"}>Каталог</NavLink>
+            <NavLink className={headerStyle.header__link} style={{ textDecoration: 'none', color: 'black' }} to={"/products"}>Каталог</NavLink>
             <div className={headerStyle.header__link}>Избранное</div>
             <div className={headerStyle.header__link}>Корзина</div>
             <div className={headerStyle.header__icons}>
