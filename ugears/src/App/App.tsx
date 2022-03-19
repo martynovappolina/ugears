@@ -1,46 +1,38 @@
-import Catalog from "../pages/catalog";
+import Catalog from "@pages/catalog";
+import Product from "@pages/product";
 import { Route, BrowserRouter, Redirect } from 'react-router-dom';
 
 import appStyle from './App.module.scss'
 import Header from "./components/header";
-import { observer, useLocalStore } from "mobx-react-lite";
-import React, { useCallback, useEffect } from "react";
-import UsersStore from "@store/UsersStore";
+import { useLocalStore } from "mobx-react-lite";
+import React from "react";
 import Authorization from "@pages/authorization";
+import UserStore from "@store/UserStore";
 
-const UsersContext = React.createContext({
-  usersStore: {} as UsersStore,
+
+const UserContext = React.createContext({
+  userStore: {} as UserStore,
 });
-const Provider = UsersContext.Provider;
-export const useUsersContext = () => React.useContext(UsersContext);
+const Provider = UserContext.Provider;
+export const useUserContext = () => React.useContext(UserContext);
 
 const App = () => {
-  const usersStore = useLocalStore (() => new UsersStore());
 
-  const getUsers = useCallback(() => {   
-      const getData = async () => {
-          try {
-            await usersStore.getUsers()
-            console.log(usersStore.list)
-          } catch (err) {}
-        };
-      getData();         
-  }, []);
-  
-  useEffect(() => getUsers(), []) 
+  const userStore = useLocalStore(() => new UserStore());
   
   return (
     <div className={appStyle.body}>
-        <Provider value={{ usersStore }}>
+        <Provider value={{ userStore }}>
           <BrowserRouter>
             <Header />
-            <Route path="/catalog" component={Catalog} />
+            <Route path="/products" component={Catalog} />
+            <Route path="/product/:id" component={Product} />
             <Route path="/autho" component={Authorization} />
-            <Redirect to="/" />
+            <Redirect to="/"/>
           </BrowserRouter>
         </Provider>
     </div>
   );
 }
 
-export default observer(App);
+export default App;

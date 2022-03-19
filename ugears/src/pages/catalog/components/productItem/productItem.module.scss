@@ -17,6 +17,10 @@
         width: 260px;
         font-size: 17px;
         font-weight: bold;
+        
+        &:hover {
+            cursor: pointer;
+        } 
     }
     &__Price{
         font-size: 18px;

@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
+
 import authoStyle from './authorization.module.scss'
+import Input from './components/input';
+import { observer } from 'mobx-react-lite';
+import { useUserContext } from '../../App/App';
 
 const Authorization = () => {   
     const [active, setActive] = useState(true);
@@ -8,6 +12,36 @@ const Authorization = () => {
     const signFunction = () => {
         setActive(!active);
         setColor(!color);
+    }
+
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('')
+
+    const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
+    const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
+
+    const userContext = useUserContext();
+    const signInClick = useCallback(() => {
+        userContext.userStore.getUser({
+            login: login
+        })
+    }, [login])
+
+    const [newLogin, setNewLogin] = useState('');
+    const [newPassword, setNewPassword] = useState('')
+    const [newRepeatPassword, setNewRepeatPassword] = useState('')
+    const [newEmail, setNewEmail] = useState('');
+    const [newPhoneNumber, setNewPhoneNumber] = useState('')
+    const inputNewLogin = useCallback((e: any) => setNewLogin(e.target.value), []);
+    const inputNewPassword = useCallback((e: any) => setNewPassword(e.target.value), []);
+    const inputNewRepeatPassword = useCallback((e: any) => setNewRepeatPassword(e.target.value), []);
+    const inputNewEmail = useCallback((e: any) => setNewEmail(e.target.value), []);
+    const inputNewPhoneNumber = useCallback((e: any) => setNewPhoneNumber(e.target.value), []);
+
+    const [passNotMatch, setPassNotMatch] = useState(false);
+    const signUpClick = () => {
+        if(newPassword === newRepeatPassword) setPassNotMatch(false);
+        else setPassNotMatch(true);
     }
 
     return (
@@ -25,51 +59,52 @@ const Authorization = () => {
             </div>
 
             <div className={active ? authoStyle.formBox : authoStyle.formBox__active}>
-                    <form action='#' className={active ? 
+                    <div className={active ? 
                     authoStyle.formBox__form + " " + authoStyle.formBox__form__signIn:
                     authoStyle.formBox__form + " " + authoStyle.formBox__form__actSignIn}>
                         <h3 className={authoStyle.formBox__title}>Вход</h3>
                         <p>
-                            <input type="text" placeholder='Логин' className={authoStyle.formBox__input}></input>
+                            <Input type='text' placeholder='Логин' onChange={inputLogin} value={login} />
                         </p>
                         <p>
-                        <input type="password" placeholder='Пароль' className={authoStyle.formBox__input}></input>
+                            <Input type="password" placeholder='Пароль' onChange={inputPassword} value={password} />
                         </p>
                         <p>
-                            <button className={authoStyle.formBox__button}>Войти</button>
+                            <button className={authoStyle.formBox__button} onClick={signInClick}>Войти</button>
                         </p>
                         <p>
                             <a href='#' className={authoStyle.formBox__forgot}>Восстановить пароль</a>
                         </p>
-                    </form>
+                    </div>
 
-                    <form action='#' className={active ? 
+                    <div className={active ? 
                     authoStyle.formBox__form + " " + authoStyle.formBox__form__signUp:
                     authoStyle.formBox__form + " " + authoStyle.formBox__form__actSignUp}>
                         <h3 className={authoStyle.formBox__title}>Регистрация</h3>
                         <p>
-                            <input type="text" placeholder='Электронная почта' className={authoStyle.formBox__input}></input>
+                            <Input type="text" placeholder='Электронная почта' onChange={inputNewEmail} value={newEmail} />
                         </p>
                         <p>
-                            <input type="text" placeholder='Номер телефона' className={authoStyle.formBox__input}></input>
+                            <Input type="text" placeholder='Номер телефона' onChange={inputNewPhoneNumber} value={newPhoneNumber} />
                         </p>
                         <p>
-                            <input type="text" placeholder='Логин' className={authoStyle.formBox__input}></input>
+                            <Input type="text" placeholder='Логин' onChange={inputNewLogin} value={newLogin} />
                         </p>
                         <p>
-                        <input type="password" placeholder='Пароль' className={authoStyle.formBox__input}></input>
+                            <Input type="password" placeholder='Пароль' onChange={inputNewPassword} value={newPassword} />
                         </p>
                         <p>
-                        <input type="password" placeholder='Подтвердите пароль' className={authoStyle.formBox__input}></input>
+                            <Input type="password" placeholder='Подтвердите пароль' onChange={inputNewRepeatPassword} value={newRepeatPassword} />
                         </p>
+                        { passNotMatch ? <div className={authoStyle.formBox__text}> Пароли не совпадают</div>:null }
                         <p>
-                            <button className={authoStyle.formBox__button + " " + authoStyle.formBox__signUp}>Зарегистрироваться</button>
+                            <button className={authoStyle.formBox__button + " " + authoStyle.formBox__signUp}onClick={signUpClick}>Зарегистрироваться</button>
                         </p>
-                    </form>
+                    </div>
             </div>
 
         </article>
     )
 };
 
-export default Authorization;
+export default observer(Authorization);

@@ -1,6 +1,7 @@
 import Rating from "@components/rating";
 import { ProductModel } from "@store/models/Products";
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Basket from "./components/basket";
 import Favorites from "./components/favorites";
 import Image from "./components/image";
@@ -12,11 +13,16 @@ type ProductItemProps = {
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+    const linkStyle = {
+        textDecoration: 'none', 
+        color: 'black'
+    }
+
     return(
         <div className={productItemStyle.product}>
             <Image src={product.imagesUrls[0]} alt={product.title}/>
             <div className={productItemStyle.product__Info}>
-                <div className={productItemStyle.product__Title}>{product.title}</div>
+                <NavLink to={`/product/${product.id}`} style={linkStyle} className={productItemStyle.product__Title}>{product.title}</NavLink>
                 <div className={productItemStyle.product__Price}>{product.price} руб</div>
                 <Rating stars={product.rating} />
                 <div className={productItemStyle.product__Text1}>Количество деталей: 

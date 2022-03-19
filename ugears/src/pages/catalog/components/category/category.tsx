@@ -1,5 +1,6 @@
 import { useProductsContext } from '@pages/catalog/catalog';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import ProductItem from '../productItem';
 import categoryStyle from './category.module.scss'
 
