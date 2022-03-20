@@ -1,0 +1,29 @@
+.swiper-body {
+    min-width: 0;
+}
+
+.image-slider {
+    position: relative;
+    width: 480px;
+    height: 480px;
+    border: solid 1px black;
+    padding: 10px 0 70px 0;
+    overflow: hidden;
+
+    &__image{
+        text-align: center;
+
+        & img {
+            width: 400px;
+            height: 400px;
+        }
+    }
+
+    & .swiper-button-prev::after, 
+    & .swiper-button-next::after { 
+        color: black;
+        font-size: 25px;
+    }
+}
+
+
