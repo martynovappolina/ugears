@@ -1,3 +1,5 @@
+@import '@styles/variables.scss';
+
 * {
     box-sizing: border-box;
 }
@@ -17,7 +19,7 @@
 
 .block {
     height: 100%;
-    background-color: rgba(26, 87, 56, 0.199);
+    background-color: $lightGreen;
     box-shadow: 0 5px 40px rgba(0, 0, 0, 0.356);
     display: flex;
     align-items: center;
@@ -25,7 +27,7 @@
 
     &__active {
         height: 100%;
-        background-color: rgba(30, 26, 87, 0.199);
+        background-color: $lightBlue;
         box-shadow: 0 5px 40px rgba(0, 0, 0, 0.356);
         display: flex;
         align-items: center;
@@ -40,7 +42,7 @@
     &__title {
         font-size: 1.2rem;
         font-weight: 500;
-        color: rgb(85, 68, 45);
+        color: $brownTitle;
         margin-bottom: 10px;
     }
 
@@ -115,31 +117,31 @@
     &__title {
         font-size: 1.5rem;
         font-weight: 500;
-        color: #333;
+        color: $brown;
     }
 
     &__button {
         border: none;
         cursor: pointer;
         font-size: inherit;
-        background-color: rgba(26, 87, 56, 0.5);
+        background-color: $green;
         color: white;
         padding: 10px 50px;
     }
 
     &__signUp {
-        background-color: rgba(30, 26, 87, 0.5);;
+        background-color: $blue;
         padding: 10px 20px;
     }
 
     &__forgot {
-        color: #333;
+        color: $brown;
     }
 
     &__text {
         width: 100%;
         text-align: center;
-        color: #333;
+        color: $brown;
     }
 }
 
