@@ -1,4 +1,4 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { CaretDownOutlined, CaretUpOutlined, HeartOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import Rating from '@components/rating';
 import ProductStore from '@store/ProductStore';
 import { observer, useLocalStore } from 'mobx-react-lite';
@@ -10,6 +10,9 @@ import productStyle from './product.module.scss'
 const Product = () => {
     const { id } = useParams<{ id: string}>();
     const [fullDescription, setFullDescription] = useState(false)
+    const [cart, setCart] = useState(false)
+    const [favourite, setFavourite] = useState(false)
+    const [counter, setCounter] = useState(1)
 
     const productStore = useLocalStore(() => new ProductStore());
     useEffect(() => {productStore.getProduct({id: id})}, []) 
@@ -17,6 +20,23 @@ const Product = () => {
     const changeDescription = () => {
         setFullDescription(!fullDescription);
     }
+
+    const changeCart = () => {
+        setCart(!cart);
+    }
+
+    const changeFavourite = () => {
+        setFavourite(!favourite);
+    }
+
+    const counterPlus = () => {
+        setCounter((c) => c=c+1)
+    }
+
+    const counterMinus = () => {
+        if (counter > 0) setCounter((c) => c=c-1)
+    }
+
 
     if(productStore.product) return (
         <div className={productStyle.product}>
@@ -26,15 +46,37 @@ const Product = () => {
                 <div className={productStyle.product__SmallText}>Артикул: {productStore.product.id}</div>
                 <Rating stars={productStore.product.rating} />
                 <div className={productStyle.product__Price}>{productStore.product.price}руб.</div>
-                {/* наличие, избранное, корзина */}
+                
                 <div className={fullDescription? productStyle.product__DescriptionActive: productStyle.product__Description}>
-                    <div className={productStyle.product__Button} onClick={changeDescription}>Описание: {
+                    <div className={productStyle.product__Description__Button} onClick={changeDescription}>Описание: {
                         fullDescription? <CaretUpOutlined />: <CaretDownOutlined /> 
                     }</div>
                     {productStore.product.description}
                 </div>
-                <div className={productStyle.product__BasketBox}>
-                    <div className={productStyle.product__Basket}>Добавить в корзину</div>
+
+                <div className={productStyle.product__CartBox}>
+                    {
+                        productStore.product.availability? 
+                        <>{
+                            cart? 
+                            <div className={productStyle.product__CartActive}>
+                                <div className={productStyle.product__CartActive__Button}>В корзине {counter} шт.</div>
+                                <div className={productStyle.product__CartActive__Counter}>
+                                    <MinusOutlined onClick={counterMinus}/>
+                                    {counter}
+                                    <PlusOutlined onClick={counterPlus} />
+                                </div>
+                            </div>:
+                            <div className={productStyle.product__Cart} onClick={changeCart}>Добавить в корзину</div>
+                        }</>:
+                        <div className={productStyle.product__NotAvailable}>Нет в наличии</div>
+                    }
+
+
+                    <div onClick={changeFavourite}>
+                        <HeartOutlined className={favourite? productStyle.product__FavouriteActive: productStyle.product__Favourite} />
+                    </div>
+
                 </div>
             </div>      
         </div>
