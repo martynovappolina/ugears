@@ -239,10 +239,10 @@
             "title": "Родстер VM-01 UGEARS",
             "description": "Классика в дереве: Родстер от UGEARS. Родстер – автомобиль с уникальной харизмой: утончённо элегантный, изысканно стильный и бескомпромиссно быстрый, он занимает отдельную страницу в истории автомобилестроения… и уже готов занять почётное место в Вашей коллекции! Родстер VM-01 от UGEARS – это сборная модель, идеально передающая обаятельный ретро-характер оригинала. Мы сохранили и плавность линий корпуса, и оригинальный дизайн корпуса: это настолько точная копия, насколько это возможно. И она работает!",
             "price": 4990,
-            "availability": true,
+            "availability": false,
             "assembly_time": "6-7 часов",
             "number_of_parts":  437,
-            "rating": 0,
+            "rating": 4.5,
             "size": "30,5x13x30 см",
             "category": "Машины",
             "images_urls": [
@@ -295,7 +295,10 @@
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-5-1500x1500.webp",
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-2-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-4-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-6-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70056-9-1500x1500.webp"
             ],
             "video_url": "",
             "shop": {
