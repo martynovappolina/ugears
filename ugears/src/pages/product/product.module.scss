@@ -32,46 +32,48 @@
         padding: 10px;
         display: flex;
         flex-direction: column;
-        transition: 0.5s ease;
+
     }
 
     &__Description {
-        height: 255px;
+        height: 220px;
         overflow-y: hidden;
         background: linear-gradient(180deg, black 70%, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0.1));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         color: #0B2349;
-    }
 
-    &__Button {
-        width: 120px;
-        height: 20px;
-        font-size: 17px;
-        border: solid 1px gray;
-        background: rgba(128, 128, 128, 0.15);
-        color: gray;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin: 0 0 7px 0;
-
-        &:hover {
-            cursor: pointer;
+        &__Button {
+            width: 120px;
+            height: 20px;
+            font-size: 17px;
+            border: solid 1px gray;
+            background: rgba(128, 128, 128, 0.15);
+            color: gray;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0 0 7px 0;
+    
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
-    &__BasketBox {
+
+
+    &__CartBox {
         width: 100%;
         display: flex;
     }
 
-    &__Basket {
+    &__Cart {
+        background: $green;
         width: 170px;
         height: 35px;
         margin: 5px 5px 5px 0;
-        background: $green;
         color: white;
         display: flex;
         align-items: center;
@@ -80,5 +82,71 @@
         &:hover {
             cursor: pointer;
         }
+    }
+
+    &__CartActive {
+        margin: 5px 5px 5px 0;
+        display: flex;
+
+        &__Button {
+            background: $blue;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 35px;
+            font-size: 14px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &__Counter {
+            width: 70px;
+            height: 35px;
+            margin: 0 7px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: solid 1px gray;
+            background: rgba(128, 128, 128, 0.15);
+        }
+    }
+
+    &__Favourite, &__FavouriteActive {
+        margin: 5px 5px 5px 0;
+        line-height: 35px;
+        text-align: center;
+        vertical-align: text-top;
+        font-size: 22px;
+        width: 35px;
+        height: 35px;
+        padding: 5px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__Favourite {
+        color: black;
+    }
+
+    &__FavouriteActive {
+        color: red;
+    }
+
+    &__NotAvailable {
+        width: 110px;
+        height: 35px;
+        margin: 10px 10px 10px 0;
+        background: $red;
+        color: white;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

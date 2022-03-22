@@ -1,9 +1,9 @@
+import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import Rating from "@components/rating";
 import { ProductModel } from "@store/models/Products";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Basket from "./components/basket";
-import Favorites from "./components/favorites";
 import Image from "./components/image";
 
 import productItemStyle from './productItem.module.scss'
@@ -16,6 +16,16 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     const linkStyle = {
         textDecoration: 'none', 
         color: 'black'
+    }
+
+    const [favourite, setFavourite] = useState(false)
+    const changeFavourite = () => {
+        setFavourite(!favourite);
+    }
+
+    const [cart, setCart] = useState(false)
+    const changeCart = () => {
+        setCart(!cart);
     }
 
     return(
@@ -36,11 +46,15 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
                 </div>
             </div>
             <div className={productItemStyle.product__Favorites}>
-                <Favorites />
+                <div onClick={changeFavourite}>
+                    <HeartOutlined className={favourite? productItemStyle.product__IconActive: productItemStyle.product__Icon} /> 
+                </div>
             </div>
-            <div className={productItemStyle.product__Basket}>
-                <Basket />
-            </div>
+            <div className={productItemStyle.product__Cart}>
+                <div onClick={changeCart}>
+                    <ShoppingCartOutlined className={cart? productItemStyle.product__IconActiveCart: productItemStyle.product__Icon} /> 
+                </div>
+                </div>
         </div>
     )
 }

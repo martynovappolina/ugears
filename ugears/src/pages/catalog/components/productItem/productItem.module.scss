@@ -45,19 +45,39 @@
         bottom: 40px;
         right: 70px;
 
+    }
+
+    &__Cart {
+        position: absolute;
+        bottom: 0px;
+        right: 35px;
+    }
+
+    &__Icon, &__IconActive, &__IconActiveCart {
+        margin: 5px 5px 5px 0;
+        line-height: 35px;
+        text-align: center;
+        vertical-align: text-top;
+        font-size: 22px;
+        width: 35px;
+        height: 35px;
+        padding: 5px;
+
         &:hover {
             cursor: pointer;
         }
     }
 
-    &__Basket {
-        position: absolute;
-        bottom: 0px;
-        right: 35px;
+    &__Icon {
+        color: black;
+    }
 
-        &:hover {
-            cursor: pointer;
-        }
+    &__IconActive {
+        color: red;
+    }
+
+    &__IconActiveCart {
+        color: rgb(255, 166, 0);
     }
 }
 
