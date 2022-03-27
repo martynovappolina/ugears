@@ -3,7 +3,6 @@ import Rating from "@components/rating";
 import { ProductModel } from "@store/models/Products";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import Basket from "./components/basket";
 import Image from "./components/image";
 
 import productItemStyle from './productItem.module.scss'
