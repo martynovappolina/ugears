@@ -1,5 +1,5 @@
-{
-    "products": [
+
+    [
         {
             "id": 1,
             "title": "Стимпанк-часики Ugears",
@@ -13,7 +13,10 @@
             "category": "Механизмы",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70093-3-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70093-4-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70093-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70093-6-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70093-5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70093-7-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/7DBbZuQfMfQ",
             "shop": {
@@ -55,12 +58,16 @@
             "availability": true,
             "assembly_time": "3 часа",
             "number_of_parts": 300, 
-            "rating": 4,
+            "rating": 0,
             "size": "18,5x9,5x16 см",
             "category": "Механизмы",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70080-2-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70080-3-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70080-3-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70080-6-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70080-5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70080-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/70080-10-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/3wFJ0TC_XgY",
             "shop": {
@@ -102,11 +109,14 @@
             "availability": true,
             "assembly_time": "4 часа",
             "number_of_parts":  189,
-            "rating": 3.5,
+            "rating": 0,
             "size": "24,5x17,5x12 см",
             "category": "Механизмы",
             "images_urls": [
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70148-1-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70148-1-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70148-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70148-6-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70148-3-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/ufa89NKnkEM",
             "shop": {
@@ -148,12 +158,15 @@
             "availability": true,
             "assembly_time": "4-5 часов",
             "number_of_parts": 292, 
-            "rating": 0,
+            "rating": 4.6,
             "size": "40x17x22 см",
             "category": "Механизмы",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70030-5-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/xardi-gardi-ugears-70030_3-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/xardi-gardi-ugears-70030_3-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/xardi-gardi-ugears-70030_8-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/xardi-gardi-ugears-70030_2-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/xardi-gardi-ugears-70030_10-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/B3olRbhHgJ8",
             "shop": {
@@ -200,7 +213,10 @@
             "category": "Механизмы",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/70129-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/70129-4-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/70129-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/70129-5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/70129-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/70129-6-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/mm5nWnxFZI0",
             "shop": {
@@ -242,12 +258,17 @@
             "availability": false,
             "assembly_time": "6-7 часов",
             "number_of_parts":  437,
-            "rating": 4.5,
+            "rating": 5,
             "size": "30,5x13x30 см",
             "category": "Машины",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-2-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-4-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-6-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-8-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-9-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-10-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70052-11-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/Mq1Scv3rV_Y",
             "shop": {
@@ -345,7 +366,12 @@
             "category": "Машины",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70021-1-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70021-2-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70021-2-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70021-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70021-5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70021-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/avtotsisterna-ugears-70021_4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/avtotsisterna-ugears-70021_8-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/n1tOdTmpC8g",
             "shop": {
@@ -392,7 +418,11 @@
             "category": "Машины",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70022-1-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70022-5-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70022-5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70022-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/pozharnaja-lestnitsa-ugears-70022_8-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70022-3-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/pozharnaja-lestnitsa-ugears-70022_16-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/k-oG6dkqk7U",
             "shop": {
@@ -439,7 +469,12 @@
             "category": "Машины",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/sportkar-u-9-gran-pri-ugears-70044_01-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70044-4-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70044-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70044-9-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70044-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70044-8-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/sportkar-u-9-gran-pri-ugears-70044_16-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/sportkar-u-9-gran-pri-ugears-70044_11-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/UGHNX0r4c-8",
             "shop": {
@@ -487,7 +522,9 @@
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70134-5-1500x1500.webp",
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70134-7-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70134-3-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70134-3-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70134-9-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/70134-8-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/kfiRnUa7Ou4",
             "shop": {
@@ -535,7 +572,10 @@
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/shkatulka-s-sekretom-ugears-70031_01-1500x1500.webp",
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70031-5-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/shkatulka-s-sekretom-ugears-70031_5-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/shkatulka-s-sekretom-ugears-70031_5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70031-9-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70031-2-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/shkatulka-s-sekretom-ugears-70031_10-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/qlwYTy3ct3w",
             "shop": {
@@ -583,7 +623,10 @@
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-1-1500x1500.webp",
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-3-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-9-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-9-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-4-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70058-11-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/Z68vMSBtq2I",
             "shop": {
@@ -631,7 +674,10 @@
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70032-1-1500x1500.webp",
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70032-2-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70032-5-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70032-5-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/manipuljator-na-relsax-ugears-70032_15-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/manipuljator-na-relsax-ugears-70032_16-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70032-6-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/Qh9UUohmiWw",
             "shop": {
@@ -679,7 +725,10 @@
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/lokomotiv-s-tenderom-ugears-70012_01-1500x1500.webp",
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70012-5-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70012-1-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70012-1-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70012-10-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70012-1-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70012-8-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/Z68vMSBtq2I",
             "shop": {
@@ -726,7 +775,11 @@
             "category": "Поезда",
             "images_urls": [
                 "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70014-1-1500x1500.webp",
-                "https://ugearsshop.ru/image/cache/catalog/Produkts/pereezd-ugears-70014_12-1500x1500.webp"
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/pereezd-ugears-70014_12-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70014-3-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70014-7-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70014-8-1500x1500.webp",
+                "https://ugearsshop.ru/image/cache/catalog/Produkts/NewFoto/70014-2-1500x1500.webp"
             ],
             "video_url": "https://www.youtube.com/embed/Hxno2f2FGVk",
             "shop": {
@@ -761,4 +814,3 @@
             }  
         }
     ]
-}

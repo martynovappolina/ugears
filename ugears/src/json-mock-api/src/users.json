@@ -1,5 +1,4 @@
-{
-    "users": [
+[
       {
         "id": 1,
         "last_name": "Иванов",
@@ -52,9 +51,52 @@
         "password": "123",
         "is_manager": false,
         "is_admin": false,
-        "phone_number": "89465738475",
+        "phone_number": "89465707975",
         "mail": "ivanov2@mail.ru"
+      },
+      {
+        "id": 6,
+        "last_name": "Иванов",
+        "name": "Николай",
+        "login": "ivanovn2",
+        "password": "123",
+        "is_manager": false,
+        "is_admin": false,
+        "phone_number": "89465738655",
+        "mail": "ivanovn@mail.ru"
+      },
+      {
+        "id": 7,
+        "last_name": "Иванов",
+        "name": "Пётр",
+        "login": "ivanovp2",
+        "password": "123",
+        "is_manager": false,
+        "is_admin": false,
+        "phone_number": "89465759675",
+        "mail": "ivanovp@mail.ru"
+      },
+      {
+        "id": 8,
+        "last_name": "Иванова",
+        "name": "Светлана",
+        "login": "ivanovas2",
+        "password": "123",
+        "is_manager": false,
+        "is_admin": false,
+        "phone_number": "89765928475",
+        "mail": "ivanovas@mail.ru"
+      },
+      {
+        "id": 9,
+        "last_name": "Иванова",
+        "name": "Марина",
+        "login": "ivanovam2",
+        "password": "123",
+        "is_manager": false,
+        "is_admin": false,
+        "phone_number": "89765930495",
+        "mail": "ivanovam@mail.ru"
       }
-
     ]
-  }
+  
