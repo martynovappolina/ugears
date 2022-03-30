@@ -3,19 +3,15 @@
 .swiper-body {
     min-width: 0;
     display: flex;
-    width: 570px;
-    height: 550px;
-    align-items: flex-start;
-    justify-content: space-between;
 }
 
 .image-slider {
     position: relative;
-    // padding: 10px 0 70px 0;
     overflow: hidden;
     width: 400px;
     height: 400px;
     min-width: 0;
+    margin: 20px;
 
     &__image{
         text-align: center;
@@ -44,12 +40,10 @@
     height: 350px;
     overflow: auto;
     min-width: 0;
-    //border: solid grey 1px;
 
     &__slide {
         opacity: 0.5;
         transition: opacity 0.3s ease 0s;
-        //border: solid 1px grey;
 
         &.swiper-slide-thumb-active {
             opacity: 1;

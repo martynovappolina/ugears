@@ -19,7 +19,8 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
         const headers = {...params.headers};
 
         if (params.method === HTTPMethod.GET) {
-            url = `${url}?${qs.stringify(params.data)}`
+            url = url;
+            //url = `${url}?${qs.stringify(params.data)}`
         }
         if (params.method === HTTPMethod.POST) {
             body =  JSON.stringify(params.data)

@@ -12,11 +12,11 @@ const Category: React.FC<CategoryProps> = ({category}) => {
 
     return(
         <div className={categoryStyle.category}> 
-        <div className={categoryStyle.category__title}>{category}</div>
-        {
-            Context.productsListStore.list.filter((product) => product.category === category)
-            .map((product) => <div key={product.id}><ProductItem product={product} /></div>)
-        }
+            <div className={categoryStyle.category__title}>{category}</div>
+            {
+                Context.productsListStore.list.filter((product) => product.category === category)
+                .map((product) => <div key={product.id}><ProductItem product={product} /></div>)
+            }
         </div>
     )
 };

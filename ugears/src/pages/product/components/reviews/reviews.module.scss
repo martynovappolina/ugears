@@ -1,0 +1,29 @@
+@import '@styles/variables.scss';
+
+.reviews {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review {
+    display: flex;
+    width: 500px;
+    border: solid $green 1px;
+    border-radius: 15px;
+    padding: 7px;
+    margin: 7px;
+
+    &__User {
+
+        &__Date {
+            color: gray;
+            font-size: 10px;
+        }
+    }
+
+    &__Text {
+        margin-left: 10px;
+    }
+}
