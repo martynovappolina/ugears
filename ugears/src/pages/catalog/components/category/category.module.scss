@@ -3,26 +3,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 1250px;
-    width: 400px;
+    height: 1030px;
+    width: 370px;
     border: 1px solid black;
 
     overflow-y: auto;
     overflow-x: hidden;
-    transform: rotate(-90deg) translateY(-827px);
+    transform: rotate(-90deg) translateY(-700px);
     transform-origin: right top;
 
     &__title {
         position: sticky;
-        width: 250px;
-        height: 32px;
+        width: 220px;
+        height: 25px;
         border-right: 1px solid black;
         border-bottom: 1px solid black;
         border-radius: 0px 0px 15px 0px;
         left: 200px;
-        top: 250px;
+        top: 200px;
         text-align: center;
-        font-size: 30px;
+        font-size: 23px;
 
         transform: rotate(90deg);
         transform-origin: right top;

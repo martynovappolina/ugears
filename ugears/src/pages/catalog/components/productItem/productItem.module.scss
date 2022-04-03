@@ -1,17 +1,17 @@
 .product {
-    height: 320px;
-    width: 325px;
+    height: 260px;
+    width: 260px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    transform: rotate(90deg) translateX(260px);
+    transform: rotate(90deg) translateX(230px);
     transform-origin: right top;
     position: relative;
 
     &__Info{
         display: flex;
         flex-direction: column;
-        width: 240px;
+        width: 200px;
     }
     &__Title{
         width: 260px;
@@ -42,15 +42,14 @@
 
     &__Favorites {
         position: absolute;
-        bottom: 40px;
-        right: 70px;
-
+        bottom: 25px;
+        right: 40px;
     }
 
     &__Cart {
         position: absolute;
-        bottom: 0px;
-        right: 35px;
+        bottom: -15px;
+        right: 20px;
     }
 
     &__Icon, &__IconActive, &__IconActiveCart {
