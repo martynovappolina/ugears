@@ -1,4 +1,13 @@
 .gear {
+    &__body {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -5;
+    }
+
     &__1, &__2, &__3, &__4, &__5, &__6, &__7,
     &__8, &__9, &__10, &__11, &__12, &__13, &__14 {
         position: fixed;
