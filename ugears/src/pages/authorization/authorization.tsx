@@ -4,10 +4,31 @@ import authoStyle from './authorization.module.scss'
 import Input from './components/input';
 import { observer } from 'mobx-react-lite';
 import { useUserContext } from '../../App/App';
+import ApiStore from '@shared/store/ApiStore';
+import { HTTPMethod } from '@shared/store/ApiStore/types';
+import { UserApi } from '@store/models/Users';
 
 const Authorization = () => {   
     const [active, setActive] = useState(true);
     const [color, setColor] = useState(true);
+
+    const apiStore = new ApiStore('http://51.250.76.99:8080/api/');
+    
+    async function getUser() {
+        const response = await apiStore.request<UserApi>( {
+            method: HTTPMethod.POST,
+            endpoint: `auth/login/`,
+            data: {
+                username: login,
+                password: password,
+            },
+        }); 
+        console.log(response.data)
+    }
+
+    useCallback(() => {
+        getUser();
+    }, []);
 
     const signFunction = () => {
         setActive(!active);
