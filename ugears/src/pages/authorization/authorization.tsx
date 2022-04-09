@@ -1,34 +1,16 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import authoStyle from './authorization.module.scss'
 import Input from './components/input';
-import { observer } from 'mobx-react-lite';
-import { useUserContext } from '../../App/App';
+import { observer, useLocalStore } from 'mobx-react-lite';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
-import { UserApi } from '@store/models/Users';
+import {  UserSignIn, UserSignUp } from '@store/models/Users';
+import UserStore from '@store/UserStore';
 
 const Authorization = () => {   
     const [active, setActive] = useState(true);
     const [color, setColor] = useState(true);
-
-    const apiStore = new ApiStore('http://51.250.76.99:8080/api/');
-    
-    async function getUser() {
-        const response = await apiStore.request<UserApi>( {
-            method: HTTPMethod.POST,
-            endpoint: `auth/login/`,
-            data: {
-                username: login,
-                password: password,
-            },
-        }); 
-        console.log(response.data)
-    }
-
-    useCallback(() => {
-        getUser();
-    }, []);
 
     const signFunction = () => {
         setActive(!active);
@@ -41,12 +23,38 @@ const Authorization = () => {
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
 
-    const userContext = useUserContext();
+    const apiStore = new ApiStore('http://51.250.76.99:8080/api/');
+    const userStore = useLocalStore(() => new UserStore());
+    
     const signInClick = useCallback(() => {
-        userContext.userStore.getUser({
-            login: login
-        })
-    }, [login])
+        async function postUser() {
+            const response = await apiStore.request<UserSignIn>( {
+                method: HTTPMethod.POST,
+                endpoint: 'auth/login',
+                headers: {},
+                data: {
+                    "username": login,
+                    "password": password,
+                },
+            }); 
+            getCheckUser();
+        };
+        async function getCheckUser() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.GET,
+                headers: {},
+                endpoint: 'auth/check',
+                data: {},
+            }); 
+            console.log(response)
+            if (response.success) {
+                userStore.getProfileUser();
+                console.log(userStore.user);
+            };
+        };
+        postUser();
+    }, [login, password])
+
 
     const [newLogin, setNewLogin] = useState('');
     const [newPassword, setNewPassword] = useState('')
@@ -60,14 +68,28 @@ const Authorization = () => {
     const inputNewPhoneNumber = useCallback((e: any) => setNewPhoneNumber(e.target.value), []);
 
     const [passNotMatch, setPassNotMatch] = useState(false);
-    const signUpClick = () => {
-        if(newPassword === newRepeatPassword) setPassNotMatch(false);
+    const signUpClick = useCallback(() => {
+        async function postUser() {
+            const response = await apiStore.request<UserSignUp>( {
+                method: HTTPMethod.POST,
+                endpoint: 'auth/signup',
+                headers: {},
+                data: {
+                    "username": newLogin,
+                    "password": newPassword,
+                    "email": newEmail,
+                },
+            }); 
+        }
+        if(newPassword === newRepeatPassword) {
+            setPassNotMatch(false);
+            postUser();
+        }
         else setPassNotMatch(true);
-    }
+    }, [newLogin, newPassword, newRepeatPassword, newEmail])
 
     return (
         <article className={authoStyle.container}>
-
             <div className={color? authoStyle.block : authoStyle.block__active}>
                 <section className={authoStyle.block__item}>
                     <h2 className={authoStyle.block__title}>У Вас уже есть аккаунт?</h2>

@@ -22,7 +22,7 @@ const Reviews = () => {
     var reviews: ReviewModel[];
     if ((reviewsStore.list.length<3)||(allRev===2)) reviews = reviewsStore.list;
     else reviews = reviewsStore.list.slice(0,3);
-console.log(allRev)
+
     if(reviewsStore.list.length !== 0) return (
         <div className={reviewsStyle.reviews}>
             {
