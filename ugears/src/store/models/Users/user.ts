@@ -1,3 +1,14 @@
+export type UserSignIn = { 
+    username: string;
+    password: string;
+}
+
+export type UserSignUp = { 
+    username: string;
+    password: string;
+    email: string;
+}
+
 export type UserApi = {
     // id: number;
     // name: string;

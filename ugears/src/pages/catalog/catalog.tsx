@@ -21,9 +21,6 @@ const Catalog = () => {
     
     return(
       <Provider value={{ productsListStore }}>
-        {
-          productsListStore.list.map((el) => <div key={el.id}></div>)
-        }
         {productsListStore.meta === Meta.error && <Error />}
         {productsListStore.meta === Meta.loading && <Loading />}
         {productsListStore.meta == Meta.success && 

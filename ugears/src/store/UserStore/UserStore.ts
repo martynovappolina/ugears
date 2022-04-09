@@ -22,7 +22,7 @@ export default class UsersStore implements ILocalStore {
             _meta: observable,
             user: computed,
             meta: computed,
-            getUser: action
+            getProfileUser: action,
         })
     }
 
@@ -34,13 +34,13 @@ export default class UsersStore implements ILocalStore {
         return this._meta;
     }
 
-    async getUser(params: GetUserParams): Promise<void> {
+    async getProfileUser(): Promise<void> {
         this._meta = Meta.loading;
         this._user = getInitialUserModel();
 
-        const response = await this._apiStore.request<UserApi[]>( {
+        const response = await this._apiStore.request<UserApi>( {
             method: HTTPMethod.GET,
-            endpoint: 'login/',
+            endpoint: 'profile',
             data: {},
         }); 
         
@@ -48,7 +48,6 @@ export default class UsersStore implements ILocalStore {
             if(!response.success) {
                 this._meta = Meta.error;
             }
-
             try {
                 this._user = normalizeUser(response.data);
                 this._meta = Meta.success;
@@ -60,7 +59,7 @@ export default class UsersStore implements ILocalStore {
 
         })
     }
-
+    
     destroy(): void {
         this._meta = Meta.initial;
         this._user = getInitialUserModel();
