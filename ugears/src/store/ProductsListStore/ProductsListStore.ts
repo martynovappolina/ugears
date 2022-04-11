@@ -5,23 +5,27 @@ import { normalizeProduct, ProductApi, ProductModel } from "@store/models/Produc
 import ApiStore from "@shared/store/ApiStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
+import { getProductsListParams } from "./types";
 
 const BASE_URL = "http://localhost:3000/"
 
-type PrivateFields = "_list" | "_meta"
+type PrivateFields = "_list" | "_meta" | "_totalCount"
 
 export default class ProductsListStore implements ILocalStore {
         private readonly _apiStore = new ApiStore(BASE_URL); 
 
     private _list: CollectionModel<number, ProductModel> = getInitialCollectionModel();
     private _meta: Meta = Meta.initial;
+    private _totalCount: number = 0;
 
     constructor() {
         makeObservable<ProductsListStore, PrivateFields>(this, {
             _list: observable.ref,
             _meta: observable,
+            _totalCount: observable,
             list: computed,
             meta: computed,
+            totalCount: computed,
             getProductsList: action
         })
     }
@@ -34,13 +38,17 @@ export default class ProductsListStore implements ILocalStore {
         return this._meta;
     }
 
-    async getProductsList(): Promise<void> {
+    get totalCount(): number {
+        return this._totalCount;
+    }
+
+    async getProductsList(params: getProductsListParams): Promise<void> {
         this._meta = Meta.loading;
         this._list = getInitialCollectionModel();
 
         const response = await this._apiStore.request<ProductApi[]>( {
             method: HTTPMethod.GET,
-            endpoint: "products/",
+            endpoint: `products?[category]=${params.category}&_limit=4&_page=${params.page}`,
             data: {},
         }); 
         
@@ -54,6 +62,8 @@ export default class ProductsListStore implements ILocalStore {
                 for (const item of response.data) {
                     list.push(normalizeProduct(item));
                 }
+                if (response.headers !== undefined) this._totalCount = response.headers['x-total-count'];
+                console.log(response.headers)
                 this._meta = Meta.success;
                 this._list = normalizeCollection(list, (listItem) => listItem.id);
                 return;

@@ -38,7 +38,7 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
             else 
                 return {
                     success: false,
-                    data: null,
+                    data: await response.json(),
                     status: response.status,
                 };
         }catch(e) {

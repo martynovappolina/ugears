@@ -29,21 +29,25 @@ export type ApiResponse<SuccessT, ErrorT> =
     success: true;
     data: SuccessT;
     status: StatusHTTP;
+    headers: any;
 }
     | {
     success: true;
     data: any;
     status: StatusHTTP;
+    headers: any;
     }
     | {
     success: false;
     data: ErrorT;
     status: StatusHTTP;
+    headers: any;
 }
     | {
     success: false;
     data: any;
     status: StatusHTTP;
+    headers: any;
     }
 ;
 
