@@ -10,22 +10,24 @@ import categoryStyle from './category.module.scss'
 
 type CategoryProps = {
     category: string;
+    i: number;
+    totalCount: number;
 }
 
-const Category: React.FC<CategoryProps> = ({category}) => {
+const Category: React.FC<CategoryProps> = ({category, i, totalCount}) => {
     const productsListStore = useLocalObservable(() => new ProductsListStore());
     const [products, setProducts] = useState<ProductModel[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalCount, setTotalCount] = useState(0);
     const [fetching, setFetching] = useState(false);
+    const[sT, setST] = useState(0);
 
     const scrollHandler = () => {
-        let sH = document.querySelector(`.${categoryStyle.category}`)?.scrollHeight;
-        let cH = document.querySelector(`.${categoryStyle.category}`)?.clientHeight;
-        let sT = document.querySelector(`.${categoryStyle.category}`)?.scrollTop;
+        let sH = document.querySelectorAll(`.${categoryStyle.category}`)[i]?.scrollHeight;
+        let cH = document.querySelectorAll(`.${categoryStyle.category}`)[i]?.clientHeight;
+        setST(document.querySelectorAll(`.${categoryStyle.category}`)[i]?.scrollTop);
         let sum: number;
 
-        if(sH !== undefined && cH!== undefined && sT!==undefined) {
+        if(sH !== undefined && cH!== undefined && sT!==undefined && (products.length < totalCount)) {
             sum = sH - (cH + sT)
             if(sum < 30) setFetching(true);
         }
@@ -38,12 +40,16 @@ const Category: React.FC<CategoryProps> = ({category}) => {
     }, [fetching]);
 
     useEffect(() => {
-        if(productsListStore.meta === 'success') setProducts([...products, ...productsListStore.list]);
+        if(productsListStore.meta === 'success') {
+            setProducts([...products, ...productsListStore.list]);
+            document.querySelectorAll(`.${categoryStyle.category}`)[i].scrollTop = sT;
+        }
+         
     }, [productsListStore.list])
     
     return(<>
         {productsListStore.meta === Meta.error && <Error />}
-        {productsListStore.meta === Meta.loading && <Loading />}
+        {/* {productsListStore.meta === Meta.loading && <Loading />} */}
         {productsListStore.meta == Meta.success && 
         <div className={categoryStyle.category} onScroll={scrollHandler}> 
             <div className={categoryStyle.category__title}>{category}</div>

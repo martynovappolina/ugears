@@ -10,6 +10,7 @@ export type RequestParams<ReqT> = {
     endpoint: string; 
     headers: Record<string, string>; 
     data: ReqT;
+    withCredentials?: boolean;
 }
 
 // Перечисление статусов ответа
@@ -29,25 +30,21 @@ export type ApiResponse<SuccessT, ErrorT> =
     success: true;
     data: SuccessT;
     status: StatusHTTP;
-    headers: any;
 }
     | {
     success: true;
     data: any;
     status: StatusHTTP;
-    headers: any;
     }
     | {
     success: false;
     data: ErrorT;
     status: StatusHTTP;
-    headers: any;
 }
     | {
     success: false;
     data: any;
     status: StatusHTTP;
-    headers: any;
     }
 ;
 
