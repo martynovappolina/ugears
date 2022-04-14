@@ -62,8 +62,6 @@ export default class ProductsListStore implements ILocalStore {
                 for (const item of response.data) {
                     list.push(normalizeProduct(item));
                 }
-                if (response.headers !== undefined) this._totalCount = response.headers['x-total-count'];
-                console.log(response.headers)
                 this._meta = Meta.success;
                 this._list = normalizeCollection(list, (listItem) => listItem.id);
                 return;

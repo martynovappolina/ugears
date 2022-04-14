@@ -23,7 +23,7 @@ const Authorization = () => {
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
 
-    const apiStore = new ApiStore('http://51.250.76.99:8080/api/');
+    const apiStore = new ApiStore('https://gears4us.ru/api/');
     const userStore = useLocalStore(() => new UserStore());
     
     const signInClick = useCallback(() => {
@@ -36,6 +36,7 @@ const Authorization = () => {
                     "username": login,
                     "password": password,
                 },
+                withCredentials: true,
             }); 
             getCheckUser();
         };
@@ -45,6 +46,7 @@ const Authorization = () => {
                 headers: {},
                 endpoint: 'auth/check',
                 data: {},
+                withCredentials: true,
             }); 
             console.log(response)
             if (response.success) {

@@ -22,13 +22,13 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
             url = url;
             //url = `${url}?${qs.stringify(params.data)}`
         
-
         try {
             let response: any = await fetch(url, {
                 method: params.method,
                 headers,
                 body,
             })
+            
             if (response.ok) 
                 return {
                     success: true,
@@ -38,7 +38,7 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
             else 
                 return {
                     success: false,
-                    data: await response.json(),
+                    data: null,
                     status: response.status,
                 };
         }catch(e) {

@@ -6,7 +6,7 @@ import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { getInitialUserModel, normalizeUser, UserApi, UserModel } from "@store/models/Users";
 import { GetUserParams } from "./types";
 
-const BASE_URL = "http://51.250.76.99:8080/api/"
+const BASE_URL = "https://gears4us.ru/api/"
 
 type PrivateFields = "_user" | "_meta"
 
