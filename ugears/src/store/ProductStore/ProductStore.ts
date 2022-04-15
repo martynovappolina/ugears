@@ -41,7 +41,8 @@ export default class ProductStore implements ILocalStore {
         const response = await this._apiStore.request<ProductApi[]>( {
             method: HTTPMethod.GET,
             endpoint: `products/${params.id}`,
-            data: {},
+            headers: {},
+            data: null,
         }); 
         
         runInAction(() => {

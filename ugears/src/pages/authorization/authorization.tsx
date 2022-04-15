@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 import authoStyle from './authorization.module.scss'
 import Input from './components/input';
