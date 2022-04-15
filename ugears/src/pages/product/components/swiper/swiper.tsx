@@ -5,7 +5,6 @@ import Swiper, { Navigation, Lazy, Mousewheel, Zoom, Thumbs } from 'swiper';
 import React, { useState } from 'react';
 import VideoPlayer from './components/videoPlayer';
 import VideoPlayerMini from './components/videoPlayerMini';
-import { addHiddenProp } from 'mobx/dist/internal';
 
 type SwiperProps = {
     images_urls: string[],
@@ -89,7 +88,7 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url }) => {
             </div>
 
             { video? <VideoPlayer url = {video_url}/>:null }
-            <div style={video? hiddenStyle: null} className='image-slider swiper-container'>
+            <div style={video? hiddenStyle: undefined} className='image-slider swiper-container'>
                 <div className='image-slider__wrapper swiper-wrapper'>
                     {images_urls.map((url) => 
                         <div key={url} className='image-slider__slide swiper-slide'>

@@ -41,7 +41,8 @@ export default class UsersStore implements ILocalStore {
         const response = await this._apiStore.request<UserApi>( {
             method: HTTPMethod.GET,
             endpoint: 'profile',
-            data: {},
+            headers: {},
+            data: null,
         }); 
         
         runInAction(() => {

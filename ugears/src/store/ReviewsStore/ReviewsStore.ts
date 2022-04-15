@@ -41,7 +41,8 @@ export default class ReviewsStore implements ILocalStore {
         const response = await this._apiStore.request<ReviewApi[]>( {
             method: HTTPMethod.GET,
             endpoint: "reviews/",
-            data: {},
+            headers: {},
+            data: null,
         }); 
         
         runInAction(() => {

@@ -9,7 +9,7 @@ export type RequestParams<ReqT> = {
     method: HTTPMethod; 
     endpoint: string; 
     headers: Record<string, string>; 
-    data: ReqT;
+    data: ReqT | null;
     withCredentials?: boolean;
 }
 
