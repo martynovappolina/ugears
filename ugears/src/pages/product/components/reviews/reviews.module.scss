@@ -38,4 +38,26 @@
     &__Text {
         margin-left: 10px;
     }
+
+    &__textarea {
+        margin: 30px;
+        margin-bottom: 5px;
+        width: 500px;
+        height: 150px;
+    }
+
+    &__button {
+        border: none;
+        cursor: pointer;
+        font-size: inherit;
+        background-color: $green;
+        color: white;
+        padding: 10px 50px;
+        margin-left: 30px;
+    }
+
+    &__box {
+        display: flex;
+    }
 }
+

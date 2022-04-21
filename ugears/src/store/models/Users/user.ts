@@ -9,12 +9,17 @@ export type UserSignUp = {
     email: string;
 }
 
+export type UserEdit = {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 export type UserApi = {
-    // id: number;
-    // name: string;
-    // last_name: string;
+    userID: number;
     username: string;
-    password: string;
+    firstName: string;
+    lastName: string;
     // is_manager: boolean;
     // is_admin: boolean;
     // phone_number: string;
@@ -22,11 +27,10 @@ export type UserApi = {
 }
 
 export type UserModel = {
-    // id: number;
-    // name: string;
-    // lastName: string;
+    userID: number;   
     username: string;
-    password: string;
+    firstName: string;
+    lastName: string;
     // isManager: boolean;
     // isAdmin: boolean;
     // phoneNumber: string;
@@ -36,11 +40,10 @@ export type UserModel = {
 export const normalizeUser = (
     from: UserApi
 ): UserModel => ({
-    // id: from.id,
-    // name: from.name,
-    // lastName: from.last_name,
     username: from.username,
-    password: from.password,
+    userID: from.userID,
+    firstName: from.firstName,
+    lastName: from.lastName,
     // isManager: from.is_manager,
     // isAdmin: from.is_admin,
     // phoneNumber: from.phone_number,
@@ -49,11 +52,10 @@ export const normalizeUser = (
 
 
 export const getInitialUserModel = (): UserModel => ({
-    // id: 0,
-    // name: '',
-    // lastName: '',
+    userID: 0,
     username: '',
-    password: '',
+    firstName: '',
+    lastName: '',
     // isManager: false,
     // isAdmin: false,
     // phoneNumber: '',
@@ -63,11 +65,10 @@ export const getInitialUserModel = (): UserModel => ({
 export const getInitialUsersModel = (): UserModel[] => (
     [
         {
-            // id: 0,
-            // name: '',
-            // lastName: '',
+            userID: 0,
             username: '',
-            password: '',
+            firstName: '',
+            lastName: '',
             // isManager: false,
             // isAdmin: false,
             // phoneNumber: '',
