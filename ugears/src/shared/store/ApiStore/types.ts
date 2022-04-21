@@ -10,7 +10,7 @@ export type RequestParams<ReqT> = {
     endpoint: string; 
     headers: Record<string, string>; 
     data: ReqT | null;
-    withCredentials?: boolean;
+    withCredentials?: RequestCredentials;
 }
 
 // Перечисление статусов ответа

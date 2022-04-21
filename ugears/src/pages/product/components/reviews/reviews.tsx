@@ -1,4 +1,5 @@
 import Rating from "@components/rating";
+import RatingSend from "@components/ratingSend";
 import { ReviewModel } from "@store/models/Reviews";
 import ReviewsStore from "@store/ReviewsStore";
 import { observer, useLocalStore } from "mobx-react-lite";
@@ -23,7 +24,7 @@ const Reviews = () => {
     if ((reviewsStore.list.length<3)||(allRev===2)) reviews = reviewsStore.list;
     else reviews = reviewsStore.list.slice(0,3);
 
-    if(reviewsStore.list.length !== 0) return (
+    if(reviewsStore.list.length !== 0) return (<>
         <div className={reviewsStyle.reviews}>
             {
                 reviews.map((rev) => 
@@ -43,7 +44,12 @@ const Reviews = () => {
             <div onClick={showRev} className={reviewsStyle.reviews__Link}>Показать все отзывы</div>: 
             <div onClick={hideRev} className={reviewsStyle.reviews__Link}>Скрыть отзывы</div>}
         </div>
-    )
+        <textarea className={reviewsStyle.review__textarea}>Оставьте свой отзыв здесь!</textarea>
+        <div className={reviewsStyle.review__box}>
+            <RatingSend stars={0}/>
+            <div className={reviewsStyle.review__button}>Отправить</div>
+        </div>
+    </>)
     return null
 };
 

@@ -1,5 +1,4 @@
-import {ApiResponse, IApiStore, RequestParams, HTTPMethod, StatusHTTP} from "./types";
-import qs from 'qs'
+import {ApiResponse, RequestParams, HTTPMethod, StatusHTTP} from "./types";
 import { action, makeObservable } from "mobx";
 import { ILocalStore } from "@utils/useLocalStore/useLocalStore";
 
@@ -31,6 +30,7 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
         try {
             let response: any = await fetch(url, {
                 method: params.method,
+                credentials: params.withCredentials,
                 headers,
                 body,
             })
@@ -38,13 +38,13 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
             if (response.ok) 
                 return {
                     success: true,
-                    data: await response.json(),
+                    data: await response.text().then((text: any) => text ? JSON.parse(text) : {}),
                     status: response.status,
                 };
             else 
                 return {
                     success: false,
-                    data: null,
+                    data: await response.text().then((text: any) => text ? JSON.parse(text) : {}),
                     status: response.status,
                 };
         }catch(e) {
