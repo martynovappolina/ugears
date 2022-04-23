@@ -1,7 +1,8 @@
 // Перечисление методов HTTP-запроса
 export enum HTTPMethod {
     GET = 'GET',
-    POST = 'POST'
+    POST = 'POST',
+    PUT = 'PUT',
 }
 
 // Параметры запроса

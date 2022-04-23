@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import authoStyle from './authorization.module.scss'
 import Input from './components/input';
@@ -7,7 +7,6 @@ import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import {  UserSignIn, UserSignUp } from '@store/models/Users';
 import UserStore from '@store/UserStore';
-import userPage from '@pages/userPage';
 import UserPage from '@pages/userPage';
 
 const Authorization = () => {   
@@ -24,10 +23,47 @@ const Authorization = () => {
 
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
-
-    const apiStore = new ApiStore('http://localhost:8080/api/');
-    const userStore = useLocalStore(() => new UserStore());
     
+    //const apiStore = new ApiStore('http://localhost:8080/api/');
+    const apiStore = new ApiStore('http://gears4us.ru/api/');
+    const userStore = useLocalStore(() => new UserStore());
+
+    const [autho, setAutho] = useState(false);
+    
+    async function getCheckUser() {
+        const response = await apiStore.request( {
+            method: HTTPMethod.GET,
+            headers: {},
+            endpoint: 'auth/check',
+            data: {},
+            withCredentials: 'include',
+        }); 
+        
+        if (response.success) {
+            userStore.getProfileUser();
+            setAutho(true);
+        }
+        else setAutho(false);
+    };
+
+    useCallback(() => {
+        getCheckUser();
+    }, [])
+
+    const handleClickExit = () => {
+        async function logoutUser() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.POST,
+                endpoint: 'auth/logout',
+                headers: {},
+                data: {},
+                withCredentials: 'include',
+            }); 
+        };
+        logoutUser();
+        setAutho(false);
+    }
+
     const signInClick = useCallback(() => {
         async function postUser() {
             const response = await apiStore.request<UserSignIn>( {
@@ -42,22 +78,8 @@ const Authorization = () => {
             }); 
             getCheckUser();
         };
-        async function getCheckUser() {
-            const response = await apiStore.request( {
-                method: HTTPMethod.GET,
-                headers: {},
-                endpoint: 'auth/check',
-                data: {},
-                withCredentials: 'include',
-            }); 
-            
-            if (response.success) {
-                userStore.getProfileUser();
-            };
-        };
         postUser();
     }, [login, password])
-
 
     const [newLogin, setNewLogin] = useState('');
     const [newPassword, setNewPassword] = useState('')
@@ -82,6 +104,7 @@ const Authorization = () => {
                     "password": newPassword,
                     "email": newEmail,
                 },
+                withCredentials: 'include',
             }); 
         }
         if(newPassword === newRepeatPassword) {
@@ -91,7 +114,9 @@ const Authorization = () => {
         else setPassNotMatch(true);
     }, [newLogin, newPassword, newRepeatPassword, newEmail])
 
-    if(userStore.user.userID !== 0) return <UserPage user={userStore.user} />;
+    if(autho) return (
+        <UserPage user={userStore.user} handleClickExit={handleClickExit} />
+    );
 
     return (
         <article className={authoStyle.container}>
