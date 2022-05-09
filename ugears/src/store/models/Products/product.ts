@@ -4,16 +4,16 @@ export type ProductApi = {
     id: number;
     title: string;
     description: string;
-    price: number;
+    price: number; 
     availability: boolean;
     assembly_time: string;
-    number_of_parts: number; 
+    parts_amount: number; 
     rating: number;
     size: string; 
     category: string;
-    images_urls: string[];
-    video_url: string;
-    shop: ShopApi;
+    image_links: string[];
+    video_link: string;
+    shop_id: number;
 }
 
 export type ProductModel = {
@@ -29,7 +29,7 @@ export type ProductModel = {
     category: string;
     imagesUrls: string[];
     videoUrl: string,
-    shop: ShopModel;
+    shopId: number,
 }
 
 export const normalizeProduct = (
@@ -41,13 +41,13 @@ export const normalizeProduct = (
     price: from.price,
     availability: from.availability,
     assemblyTime: from.assembly_time,
-    numberOfParts: from.number_of_parts,
+    numberOfParts: from.parts_amount,
     rating: from.rating,
     size: from.size,
     category: from.category,
-    imagesUrls: from.images_urls,
-    videoUrl: from.video_url,
-    shop: normalizeShop(from.shop)
+    imagesUrls: from.image_links,
+    videoUrl: from.video_link,
+    shopId: from.shop_id,
 });
 
 
@@ -64,5 +64,5 @@ export const getInitialProductModel = (): ProductModel => ({
     category: '',
     imagesUrls: [],
     videoUrl: '',
-    shop: getInitialShopModel()
+    shopId: 0,
 });

@@ -26,8 +26,8 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
     const inputLastName = useCallback((e: any) => setLastName(e.target.value), []);
     const inputEmail = useCallback((e: any) => setEmail(e.target.value), []);
 
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('http://gears4us.ru/api/');
+    const apiStore = new ApiStore('http://localhost:8080/api/');
+    //const apiStore = new ApiStore('http://gears4us.ru/api/');
 
     const handleClickSave = () => {
         async function editUser() {
