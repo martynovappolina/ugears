@@ -5,8 +5,8 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { getInitialUserModel, normalizeUser, UserApi, UserModel } from "@store/models/Users";
 
-//const BASE_URL = "http://localhost:8080/api/"
-const BASE_URL = "http://gears4us.ru/api/"
+const BASE_URL = "http://localhost:8080/api/"
+//const BASE_URL = "http://gears4us.ru/api/"
 
 type PrivateFields = "_user" | "_meta"
 

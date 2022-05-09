@@ -12,9 +12,9 @@ const Catalog = () => {
             <div className={catalogStyle.catalog}>
               <Category category="Машины" i={1} totalCount={6}/>
             </div>
-            <div className={catalogStyle.catalog}>
+            {/* <div className={catalogStyle.catalog}>
               <Category category="Поезда" i={2} totalCount={4}/>
-            </div>
+            </div> */}
         </>       
     )
 }

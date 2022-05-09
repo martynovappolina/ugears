@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import authoStyle from './authorization.module.scss'
 import Input from './components/input';
@@ -24,8 +24,8 @@ const Authorization = () => {
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
     
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('http://gears4us.ru/api/');
+    const apiStore = new ApiStore('http://localhost:8080/api/');
+    //const apiStore = new ApiStore('http://gears4us.ru/api/');
     const userStore = useLocalStore(() => new UserStore());
 
     const [autho, setAutho] = useState(false);
@@ -46,7 +46,7 @@ const Authorization = () => {
         else setAutho(false);
     };
 
-    useCallback(() => {
+    useEffect(() => {
         getCheckUser();
     }, [])
 
@@ -76,9 +76,10 @@ const Authorization = () => {
                 },
                 withCredentials: 'include',
             }); 
-            getCheckUser();
+            
         };
         postUser();
+        getCheckUser();
     }, [login, password])
 
     const [newLogin, setNewLogin] = useState('');
@@ -110,6 +111,9 @@ const Authorization = () => {
         if(newPassword === newRepeatPassword) {
             setPassNotMatch(false);
             postUser();
+            setLogin(newLogin);
+            setPassword(newPassword);
+            signInClick();
         }
         else setPassNotMatch(true);
     }, [newLogin, newPassword, newRepeatPassword, newEmail])
