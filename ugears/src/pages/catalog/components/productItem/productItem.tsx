@@ -1,7 +1,9 @@
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import Rating from "@components/rating";
+import ApiStore from "@shared/store/ApiStore";
+import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { ProductModel } from "@store/models/Products";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Image from "./components/image";
 
@@ -23,8 +25,30 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     }
 
     const [cart, setCart] = useState(false)
+    const apiStore = new ApiStore('http://localhost:8080/api/');
+    //const apiStore = new ApiStore('http://gears4us.ru/api/');
     const changeCart = () => {
         setCart(!cart);
+        async function addCart() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.POST,
+                endpoint: `cart/add/${product.id}`,
+                headers: {},
+                data: {},
+                withCredentials: 'include',
+            }); 
+        };
+        async function removeCart() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.POST,
+                endpoint: `cart/remove/${product.id}`,
+                headers: {},
+                data: {},
+                withCredentials: 'include',
+            }); 
+            
+        };
+        (cart===false)? addCart(): removeCart();
     }
 
     return(

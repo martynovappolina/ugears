@@ -9,6 +9,7 @@ import React, { useRef } from "react";
 import Authorization from "@pages/authorization";
 import UserStore from "@store/UserStore";
 import Gears from "./components/gears";
+import Cart from "@pages/cart";
 
 
 const UserContext = React.createContext({
@@ -55,7 +56,8 @@ const App = () => {
           <Route path="/products" component={Catalog} />
           <Route path="/product/:id" component={Product} />
           <Route path="/autho" component={Authorization} />
-          <Redirect to="/"/>
+          <Route path="/cart" component={Cart} />
+          <Redirect to="/products"/>
         </BrowserRouter>
       </Provider>
     </div>
