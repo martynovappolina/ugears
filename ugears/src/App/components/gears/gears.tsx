@@ -1,5 +1,5 @@
 import { SettingOutlined } from "@ant-design/icons";
-import React, { MutableRefObject, Ref, useRef, useState } from "react";
+import React from "react";
 import gearsStyle from './gears.module.scss';
 
 type GearsProps = {

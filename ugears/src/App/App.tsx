@@ -5,18 +5,22 @@ import { Route, BrowserRouter, Redirect } from 'react-router-dom';
 import appStyle from './App.module.scss'
 import Header from "./components/header";
 import { useLocalStore } from "mobx-react-lite";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Authorization from "@pages/authorization";
 import UserStore from "@store/UserStore";
 import Gears from "./components/gears";
 import Cart from "@pages/cart";
+import CartStore from "@store/CartStore/CartStore";
+import ApiStore from "@shared/store/ApiStore";
+import { HTTPMethod } from "@shared/store/ApiStore/types";
 
 
-const UserContext = React.createContext({
+const context = React.createContext({
+  cartStore: {} as CartStore,
   userStore: {} as UserStore,
 });
-const Provider = UserContext.Provider;
-export const useUserContext = () => React.useContext(UserContext);
+const Provider = context.Provider;
+export const useUgearsContext = () => React.useContext(context);
 
 const App = () => {
   const scrollRefP1 = useRef<null | HTMLSpanElement>(null);
@@ -37,6 +41,31 @@ const App = () => {
   const refArrayP = [scrollRefP1, scrollRefP2, scrollRefP3, scrollRefP4, scrollRefP5, scrollRefP6, scrollRefP7];
   const refArrayM = [scrollRefM1, scrollRefM2, scrollRefM3, scrollRefM4, scrollRefM5, scrollRefM6, scrollRefM7];
   const userStore = useLocalStore(() => new UserStore());
+  const cartStore = useLocalStore(() => new CartStore());
+  const [autho, setAutho] = useState(false);
+  //const apiStore = new ApiStore('http://localhost:8080/api/');
+  const apiStore = new ApiStore('https://gears4us.ru/api/');
+
+  async function getCheckUser() {
+    const response = await apiStore.request( {
+        method: HTTPMethod.GET,
+        headers: {},
+        endpoint: 'auth/check',
+        data: {},
+        withCredentials: 'include',
+    }); 
+    
+    if (response.success) {
+        userStore.getProfileUser();
+        setAutho(true);
+    }
+    else setAutho(false);
+  };
+
+  useEffect(() => {
+      getCheckUser();
+      cartStore.getCart();
+  }, [])
 
   const rotate = () => {
     refArrayP.map((ref) => {
@@ -49,8 +78,9 @@ const App = () => {
 
   return (
     <div className={appStyle.body} onWheel={rotate}>
+      {autho? <div></div>: <div className={appStyle.autho}>Авторизируйтесь, чтобы сохранить изменения</div>}
       <Gears refArrayP={refArrayP} refArrayM={refArrayM}/>
-      <Provider value={{ userStore }}>
+      <Provider value={{ cartStore, userStore }}>
         <BrowserRouter>
           <Header />
           <Route path="/products" component={Catalog} />

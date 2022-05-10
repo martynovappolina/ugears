@@ -11,6 +11,7 @@ import Reviews from './components/reviews';
 
 const Product = () => {
     const { id } = useParams<{id: string}>();
+    
     const [fullDescription, setFullDescription] = useState(false);
 
     const productStore = useLocalStore(() => new ProductStore());
@@ -39,7 +40,7 @@ const Product = () => {
                     }</div>
                     {productStore.product.description}
                 </div>
-                <CartBox availability={productStore.product.availability} cartActive={false} favouriteActive={false} />
+                <CartBox availability={productStore.product.availability} cartActive={false} favouriteActive={false} id={id} />
             </div>      
         </div>
 
