@@ -43,6 +43,7 @@ export default class ProductStore implements ILocalStore {
             endpoint: `api/product/${params.id}`,
             headers: {},
             data: null,
+            withCredentials:'include',
         }); 
         
         runInAction(() => {

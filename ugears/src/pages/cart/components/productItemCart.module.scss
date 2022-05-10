@@ -19,6 +19,7 @@
     &__info {
         display: flex;
         flex-direction: column;
+        width: 350px;
         height: 100%;
         align-items: center;
         justify-content: center;
@@ -33,7 +34,19 @@
         } 
     }
 
-    &__text1{
+    &__priceContainer {
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    &__price {
+        font-size: 17px;
+    }
+
+    &__text1 {
         display: flex;
         flex-direction: row;
         font-size: 14px;
@@ -79,6 +92,5 @@
         align-items: center;
         justify-content: space-around;
         border: solid 1px gray;
-        margin-left: 30px;
     }
 }

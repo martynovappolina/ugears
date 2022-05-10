@@ -6,6 +6,32 @@
     position: relative;
 }
 
+.autho {
+    position: fixed;
+    top: 60px;
+    right: 220px;
+    width: 180px;
+    height: 50px;
+    text-align: center;
+    border: solid 1px rgba(255, 0, 0, 0.256);
+    background-color: rgba(255, 0, 0, 0.14);
+    color: rgba(165, 42, 42, 0.719);
+    animation: glowing 3000ms infinite;
+}
+
+@keyframes glowing {
+    0% { opacity: 100%; }
+    10% { opacity: 80%; }
+    20% { opacity: 60%; }
+    30% { opacity: 40%; }
+    40% { opacity: 20%; }
+    50% { opacity: 10%; }
+    70% { opacity: 20%; }
+    80% { opacity: 40%; }
+    90% { opacity: 60%; }
+    100% { opacity: 80%; }
+    }
+
 ::-webkit-scrollbar {
     width: 0;
   }

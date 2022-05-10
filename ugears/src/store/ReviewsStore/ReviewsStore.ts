@@ -43,6 +43,7 @@ export default class ReviewsStore implements ILocalStore {
             endpoint: "reviews/",
             headers: {},
             data: null,
+            withCredentials:'include',
         }); 
         
         runInAction(() => {

@@ -51,6 +51,7 @@ export default class ProductsListStore implements ILocalStore {
             endpoint: `api/products/feed?category=${params.category}&pageOffset=${params.page}&pageSize=5`,
             headers: {},
             data: null,
+            //withCredentials: 'include',
         }); 
         
         runInAction(() => {

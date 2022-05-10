@@ -5,6 +5,7 @@ import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { ProductModel } from "@store/models/Products";
 import React, { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useUgearsContext } from "../../../../App/App";
 import Image from "./components/image";
 
 import productItemStyle from './productItem.module.scss'
@@ -14,6 +15,8 @@ type ProductItemProps = {
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+    const cartContext = useUgearsContext();
+    
     const linkStyle = {
         textDecoration: 'none', 
         color: 'black'
@@ -25,8 +28,17 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     }
 
     const [cart, setCart] = useState(false)
-    const apiStore = new ApiStore('http://localhost:8080/api/');
-    //const apiStore = new ApiStore('http://gears4us.ru/api/');
+    let n=0;
+
+    useEffect(()=>{
+        cartContext.cartStore.list.map((el) => 
+            {if(el.Product.id == product.id) n=el.Quantity;
+                console.log(el.Product.id)}  
+        );
+        if(n>0) setCart(true);
+    }, []);
+    //const apiStore = new ApiStore('http://localhost:8080/api/');
+    const apiStore = new ApiStore('https://gears4us.ru/api/');
     const changeCart = () => {
         setCart(!cart);
         async function addCart() {
@@ -48,7 +60,12 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             }); 
             
         };
-        (cart===false)? addCart(): removeCart();
+
+        if (cart===false) addCart() 
+        else {
+            for (let i=1; i<n; i++) removeCart();
+            removeCart();
+        }
     }
 
     return(

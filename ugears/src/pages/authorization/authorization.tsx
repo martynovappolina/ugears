@@ -24,8 +24,8 @@ const Authorization = () => {
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
     
-    const apiStore = new ApiStore('http://localhost:8080/api/');
-    //const apiStore = new ApiStore('http://gears4us.ru/api/');
+    //const apiStore = new ApiStore('http://localhost:8080/api/');
+    const apiStore = new ApiStore('https://gears4us.ru/api/');
     const userStore = useLocalStore(() => new UserStore());
 
     const [autho, setAutho] = useState(false);
