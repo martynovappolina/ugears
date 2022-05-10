@@ -1,0 +1,84 @@
+@import '@styles/variables.scss';
+
+.cart {
+    &__image {
+        width: 150px;
+        height: 150px;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 150px;
+        width: 100%;
+        margin: 10px;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &__title{
+        font-size: 17px;
+        font-weight: bold;
+        
+        &:hover {
+            cursor: pointer;
+        } 
+    }
+
+    &__text1{
+        display: flex;
+        flex-direction: row;
+        font-size: 14px;
+        color: grey;
+    }
+
+    &__text2{
+        font-size: 14px;
+        color: black;
+    }
+
+    &__link{
+        margin: 5px;
+        font-size: 14px;
+        color: $brown;
+        text-decoration: underline;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__button {
+        background: $blue;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 110px;
+        height: 35px;
+        font-size: 14px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__counter {
+        width: 70px;
+        height: 25px;
+        margin: 0 7px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border: solid 1px gray;
+        margin-left: 30px;
+    }
+}
