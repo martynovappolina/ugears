@@ -1,5 +1,6 @@
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
 import { DropImageProps } from '@store/models/Users';
 import { DragEvent, useState } from 'react';
 import imageStyle from './image.module.scss'
@@ -18,7 +19,7 @@ const UserImage = () => {
         setDrag(false);
     }
 
-    const apiStore = new ApiStore('http://localhost:8080/api/');
+    const apiStore = new ApiStore(BASE_URL);
 
     const onDropHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -35,7 +36,7 @@ const UserImage = () => {
                      formData: formData,
                 },
                 withCredentials: 'include',
-            }); 
+            });
         };
         dropImage();
         setDrag(false);

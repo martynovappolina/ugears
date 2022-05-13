@@ -1,0 +1,18 @@
+.order {
+    &__main {
+        width: 400px;
+        height: 300px;
+        border: solid 1px gray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        overflow-x: scroll;
+    }
+
+    &__img {
+        width: 100px;
+        height: 100px;
+    }
+
+}

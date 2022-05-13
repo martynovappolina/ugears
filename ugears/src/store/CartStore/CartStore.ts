@@ -6,8 +6,7 @@ import ApiStore from "@shared/store/ApiStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { CartApi, CartModel, normalizeCart } from "@store/models/Cart";
-
-const BASE_URL = "http://localhost:8080/"
+import { BASE_URL } from "@store/models/baseUrl/baseUrl";
 
 type PrivateFields = "_list" | "_meta" | "_totalCount"
 
@@ -48,7 +47,7 @@ export default class CartStore implements ILocalStore {
 
         const response = await this._apiStore.request<CartApi[]>( {
             method: HTTPMethod.GET,
-            endpoint: 'api/cart',
+            endpoint: 'cart',
             headers: {},
             data: null,
             withCredentials: 'include',

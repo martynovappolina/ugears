@@ -1,31 +1,32 @@
 import { ILocalStore } from "@utils/useLocalStore/useLocalStore";
-import ApiStore from "@shared/store/ApiStore";
-import { CollectionModel, getInitialCollectionModel, linearizeCollection, normalizeCollection } from "@store/models/shared/collection";
-import { normalizeReview, ReviewApi, ReviewModel } from "@store/models/Reviews";
 import { Meta } from "@utils/meta";
+import { CollectionModel, getInitialCollectionModel, linearizeCollection, normalizeCollection } from "@store/models/shared/collection";
+import { normalizeProduct, ProductApi, ProductModel } from "@store/models/Products";
+import ApiStore from "@shared/store/ApiStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { GetReviewsByProductIdParams } from "./types";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
+import { normalizeOrder, OrderApi, OrderModel } from "@store/models/Orders";
 import { BASE_URL } from "@store/models/baseUrl/baseUrl";
 
 type PrivateFields = "_list" | "_meta"
 
-export default class ReviewsStore implements ILocalStore {
-    private readonly _apiStore = new ApiStore(BASE_URL); 
-    private _list: CollectionModel<number, ReviewModel> = getInitialCollectionModel();
+export default class OrdersStore implements ILocalStore {
+        private readonly _apiStore = new ApiStore(BASE_URL); 
+
+    private _list: CollectionModel<number, OrderModel> = getInitialCollectionModel();
     private _meta: Meta = Meta.initial;
 
     constructor() {
-        makeObservable<ReviewsStore, PrivateFields>(this, {
+        makeObservable<OrdersStore, PrivateFields>(this, {
             _list: observable.ref,
             _meta: observable,
             list: computed,
             meta: computed,
-            getReviewsByProductId: action
+            getOrdersList: action
         })
     }
 
-    get list(): ReviewModel[] {
+    get list(): OrderModel[] {
         return linearizeCollection(this._list);
     }
 
@@ -33,16 +34,16 @@ export default class ReviewsStore implements ILocalStore {
         return this._meta;
     }
 
-    async getReviewsByProductId(params: GetReviewsByProductIdParams): Promise<void> {
+    async getOrdersList(): Promise<void> {
         this._meta = Meta.loading;
         this._list = getInitialCollectionModel();
 
-        const response = await this._apiStore.request<ReviewApi[]>( {
+        const response = await this._apiStore.request<OrderApi[]>( {
             method: HTTPMethod.GET,
-            endpoint: "reviews/",
+            endpoint: 'orders',
             headers: {},
             data: null,
-            withCredentials:'include',
+            withCredentials: 'include',
         }); 
         
         runInAction(() => {
@@ -51,17 +52,17 @@ export default class ReviewsStore implements ILocalStore {
             }
 
             try {
-                const list: ReviewModel[] = [];
+                const list: OrderModel[] = [];
                 for (const item of response.data) {
-                    if (item.product_id == params.id) list.push(normalizeReview(item));
+                    list.push(normalizeOrder(item));
                 }
                 this._meta = Meta.success;
-                this._list = normalizeCollection(list, (listItem) => listItem.userId);
+                this._list = normalizeCollection(list, (listItem) => listItem.id);
                 return;
             } catch (e) {
                 this._meta = Meta.error;
                 this._list = getInitialCollectionModel();
-                console.log("ReviewStore:" + e)
+                console.log("OrdersStore:" + e)
             }
 
         })

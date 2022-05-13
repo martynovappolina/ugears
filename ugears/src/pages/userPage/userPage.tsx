@@ -2,8 +2,12 @@ import UserImage from './components/Image/image';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { UserEdit, UserModel } from '@store/models/Users';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import userPageStyle from './userPage.module.scss'
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
+import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
+import OrdersStore from '@store/OrdersStore';
+import Order from './components/order';
 
 type UserPageProps = {
     user: UserModel;
@@ -18,6 +22,8 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
 
     const [edit, setEdit] = useState(false);
 
+    const [orders, setOrders] = useState(false);
+
     const handleClickEdit = () => {
         setEdit(true);
     };
@@ -26,8 +32,8 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
     const inputLastName = useCallback((e: any) => setLastName(e.target.value), []);
     const inputEmail = useCallback((e: any) => setEmail(e.target.value), []);
 
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+    const apiStore = new ApiStore(BASE_URL);
+    const ordersStore = useLocalStore(() => new OrdersStore());
 
     const handleClickSave = () => {
         async function editUser() {
@@ -46,6 +52,11 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
         editUser();
         setEdit(false);
     };
+
+    useEffect(()=>{
+        ordersStore.getOrdersList();
+        setOrders(true);
+    }, [])
 
     return (
         <div className={userPageStyle.userPage}>
@@ -84,7 +95,8 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                 }
                 <div className={userPageStyle.userPage__Button} onClick={handleClickExit}>Выйти</div>
                 <div className={userPageStyle.userPage__BoldText}>Заказы:</div>
-                <div className={userPageStyle.userPage__Text}>У Вас пока нет ни одного заказа, надо это исправить!</div>
+                {orders? ordersStore.list.map((el)=><Order order={el}/>) :
+                    <div className={userPageStyle.userPage__Text}>У Вас пока нет ни одного заказа, надо это исправить!</div>}
             </div>
         </div>
     )

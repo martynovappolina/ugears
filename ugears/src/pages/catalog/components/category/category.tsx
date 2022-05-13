@@ -1,5 +1,4 @@
 import Error from '@components/Error';
-import Loading from '@components/Loading';
 import { ProductModel } from '@store/models/Products';
 import ProductsListStore from '@store/ProductsListStore';
 import { Meta } from '@utils/meta';

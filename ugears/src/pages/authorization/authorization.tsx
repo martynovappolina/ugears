@@ -8,6 +8,7 @@ import { HTTPMethod } from '@shared/store/ApiStore/types';
 import {  UserSignIn, UserSignUp } from '@store/models/Users';
 import UserStore from '@store/UserStore';
 import UserPage from '@pages/userPage';
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
 
 const Authorization = () => {   
     const [active, setActive] = useState(true);
@@ -24,8 +25,7 @@ const Authorization = () => {
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
     
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+    const apiStore = new ApiStore(BASE_URL);
     const userStore = useLocalStore(() => new UserStore());
 
     const [autho, setAutho] = useState(false);
