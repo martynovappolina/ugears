@@ -29,11 +29,16 @@ const UserImage = () => {
 
         async function dropImage() {
             const response = await apiStore.request<DropImageProps>( {
-                method: HTTPMethod.POST,
-                endpoint: '',
-                headers: {},
+                method: HTTPMethod.PUT,
+                mode: 'no-cors',
+                endpoint: 'profile/avatar',
+                enctype: 'multipart/form-data',
+                headers:
+                {
+                    'Content-Type': `multipart/form-data`,
+                },
                 data: {
-                     formData: formData,
+                    avatarImage: formData,
                 },
                 withCredentials: 'include',
             });

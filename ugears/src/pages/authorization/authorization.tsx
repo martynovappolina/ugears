@@ -80,7 +80,7 @@ const Authorization = () => {
         };
         postUser();
         getCheckUser();
-    }, [login, password])
+    }, [])
 
     const [newLogin, setNewLogin] = useState('');
     const [newPassword, setNewPassword] = useState('')
@@ -106,14 +106,16 @@ const Authorization = () => {
                     "email": newEmail,
                 },
                 withCredentials: 'include',
-            }); 
+            });
+            if (response.success) {
+                setLogin(newLogin);
+                setPassword(newPassword);
+                signInClick();
+            } 
         }
         if(newPassword === newRepeatPassword) {
             setPassNotMatch(false);
             postUser();
-            setLogin(newLogin);
-            setPassword(newPassword);
-            signInClick();
         }
         else setPassNotMatch(true);
     }, [newLogin, newPassword, newRepeatPassword, newEmail])

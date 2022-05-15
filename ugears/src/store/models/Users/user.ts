@@ -20,6 +20,7 @@ export type UserApi = {
     username: string;
     firstName: string;
     lastName: string;
+    avatar: string;
     // is_manager: boolean;
     // is_admin: boolean;
     // phone_number: string;
@@ -27,7 +28,7 @@ export type UserApi = {
 }
 
 export type DropImageProps = {
-    formData: FormData;
+    avatarImage: FormData;
 }
 
 export type UserModel = {
@@ -35,6 +36,7 @@ export type UserModel = {
     username: string;
     firstName: string;
     lastName: string;
+    avatar: string;
     // isManager: boolean;
     // isAdmin: boolean;
     // phoneNumber: string;
@@ -48,6 +50,7 @@ export const normalizeUser = (
     userID: from.userID,
     firstName: from.firstName,
     lastName: from.lastName,
+    avatar: from.avatar,
     // isManager: from.is_manager,
     // isAdmin: from.is_admin,
     // phoneNumber: from.phone_number,
@@ -60,6 +63,7 @@ export const getInitialUserModel = (): UserModel => ({
     username: '',
     firstName: '',
     lastName: '',
+    avatar: '',
     // isManager: false,
     // isAdmin: false,
     // phoneNumber: '',
@@ -73,6 +77,7 @@ export const getInitialUsersModel = (): UserModel[] => (
             username: '',
             firstName: '',
             lastName: '',
+            avatar: '',
             // isManager: false,
             // isAdmin: false,
             // phoneNumber: '',
