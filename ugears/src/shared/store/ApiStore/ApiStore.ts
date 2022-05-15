@@ -24,7 +24,7 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
 
         if (params.method === HTTPMethod.POST || params.method === HTTPMethod.PUT) {
             body =  JSON.stringify(params.data)
-            headers ['Content-Type'] = 'application/json;charset=UTF-8'
+            //headers ['Content-Type'] = 'application/json;charset=UTF-8'
         }
 
         try {

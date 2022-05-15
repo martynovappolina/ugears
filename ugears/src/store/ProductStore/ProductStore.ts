@@ -5,8 +5,7 @@ import ApiStore from "@shared/store/ApiStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { GetProductParams } from "./types";
-
-const BASE_URL = "http://localhost:8080/"
+import { BASE_URL } from "@store/models/baseUrl/baseUrl";
 
 type PrivateFields = "_product" | "_meta"
 
@@ -40,7 +39,7 @@ export default class ProductStore implements ILocalStore {
 
         const response = await this._apiStore.request<ProductApi[]>( {
             method: HTTPMethod.GET,
-            endpoint: `api/product/${params.id}`,
+            endpoint: `product/${params.id}`,
             headers: {},
             data: null,
             withCredentials:'include',

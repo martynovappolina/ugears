@@ -2,6 +2,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import Rating from '@components/rating';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
 import { CartModel } from '@store/models/Cart';
 import { useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -49,8 +50,8 @@ const ProductItemCart: React.FC<ProductItemCartProps> = ({ product }) => {
         if (counter > 0) setCounter((c) => c=c-1)
     }
 
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+    const apiStore = new ApiStore(BASE_URL);
+
     const removeItem = () => {
         let q = counter;
         while (q > 0) {

@@ -8,6 +8,7 @@ import { HTTPMethod } from '@shared/store/ApiStore/types';
 import {  UserSignIn, UserSignUp } from '@store/models/Users';
 import UserStore from '@store/UserStore';
 import UserPage from '@pages/userPage';
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
 
 const Authorization = () => {   
     const [active, setActive] = useState(true);
@@ -24,8 +25,7 @@ const Authorization = () => {
     const inputLogin = useCallback((e: any) => setLogin(e.target.value), []);
     const inputPassword = useCallback((e: any) => setPassword(e.target.value), []);
     
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+    const apiStore = new ApiStore(BASE_URL);
     const userStore = useLocalStore(() => new UserStore());
 
     const [autho, setAutho] = useState(false);
@@ -80,7 +80,7 @@ const Authorization = () => {
         };
         postUser();
         getCheckUser();
-    }, [login, password])
+    }, [])
 
     const [newLogin, setNewLogin] = useState('');
     const [newPassword, setNewPassword] = useState('')
@@ -106,14 +106,16 @@ const Authorization = () => {
                     "email": newEmail,
                 },
                 withCredentials: 'include',
-            }); 
+            });
+            if (response.success) {
+                setLogin(newLogin);
+                setPassword(newPassword);
+                signInClick();
+            } 
         }
         if(newPassword === newRepeatPassword) {
             setPassNotMatch(false);
             postUser();
-            setLogin(newLogin);
-            setPassword(newPassword);
-            signInClick();
         }
         else setPassNotMatch(true);
     }, [newLogin, newPassword, newRepeatPassword, newEmail])

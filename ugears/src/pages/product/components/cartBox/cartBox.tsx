@@ -1,6 +1,9 @@
 import { HeartOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
+import CartStore from '@store/CartStore/CartStore';
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
+import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
 import { useEffect, useState } from 'react';
 import { useUgearsContext } from '../../../../App/App';
 import cartBoxStyle from './cartBox.module.scss'
@@ -17,20 +20,17 @@ const CartBox: React.FC<CartBoxProps> = ({ availability, cartActive, favouriteAc
     const [cart, setCart] = useState(cartActive)
     const [favourite, setFavourite] = useState(favouriteActive)
     const [counter, setCounter] = useState(1)
-    let n=0;
 
     useEffect(()=>{
         cartContext.cartStore.list.map((el) => 
-            {if(el.Product.id == Number(id)) n=el.Quantity;}  
+            {if(el.Product.id == Number(id)) {
+                setCart(true);
+                setCounter(el.Quantity);
+            }}  
         );
-        if(n>0) {
-            setCart(true);
-            setCounter(n);
-        }
     }, []);
 
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+    const apiStore = new ApiStore(BASE_URL);
 
     async function remove() {
         const response = await apiStore.request({

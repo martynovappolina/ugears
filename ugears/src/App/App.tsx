@@ -1,7 +1,6 @@
 import Catalog from "@pages/catalog";
 import Product from "@pages/product";
 import { Route, BrowserRouter, Redirect } from 'react-router-dom';
-
 import appStyle from './App.module.scss'
 import Header from "./components/header";
 import { useLocalStore } from "mobx-react-lite";
@@ -13,6 +12,7 @@ import Cart from "@pages/cart";
 import CartStore from "@store/CartStore/CartStore";
 import ApiStore from "@shared/store/ApiStore";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
+import { BASE_URL } from "@store/models/baseUrl/baseUrl";
 
 
 const context = React.createContext({
@@ -43,8 +43,7 @@ const App = () => {
   const userStore = useLocalStore(() => new UserStore());
   const cartStore = useLocalStore(() => new CartStore());
   const [autho, setAutho] = useState(false);
-  //const apiStore = new ApiStore('http://localhost:8080/api/');
-  const apiStore = new ApiStore('https://gears4us.ru/api/');
+  const apiStore = new ApiStore(BASE_URL);
 
   async function getCheckUser() {
     const response = await apiStore.request( {
@@ -78,7 +77,7 @@ const App = () => {
 
   return (
     <div className={appStyle.body} onWheel={rotate}>
-      {autho? <div></div>: <div className={appStyle.autho}>Авторизируйтесь, чтобы сохранить изменения</div>}
+      {/* {autho? <div></div>: <div className={appStyle.autho}>Авторизируйтесь, чтобы сохранить изменения</div>} */}
       <Gears refArrayP={refArrayP} refArrayM={refArrayM}/>
       <Provider value={{ cartStore, userStore }}>
         <BrowserRouter>

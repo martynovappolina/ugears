@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import SwiperItem from './components/swiper';
 import productStyle from './product.module.scss'
 import Reviews from './components/reviews';
+import { useUgearsContext } from '../../App/App';
 
 const Product = () => {
     const { id } = useParams<{id: string}>();
@@ -15,7 +16,9 @@ const Product = () => {
     const [fullDescription, setFullDescription] = useState(false);
 
     const productStore = useLocalStore(() => new ProductStore());
-    useEffect(() => {productStore.getProduct({id: id})}, []);
+    useEffect(() => {
+        productStore.getProduct({id: id})},
+    []); 
 
     const changeDescription = () => {
         setFullDescription(!fullDescription);

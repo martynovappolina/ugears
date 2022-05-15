@@ -7,9 +7,11 @@ export enum HTTPMethod {
 
 // Параметры запроса
 export type RequestParams<ReqT> = {
-    method: HTTPMethod; 
+    method: HTTPMethod;
+    enctype?: string;
     endpoint: string; 
-    headers: Record<string, string>; 
+    headers: Record<string, string> | Headers | undefined;
+    mode?: 'cors' | 'no-cors',
     data: ReqT | null;
     withCredentials?: RequestCredentials;
 }

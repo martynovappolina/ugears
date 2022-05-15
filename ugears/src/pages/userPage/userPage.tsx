@@ -4,6 +4,9 @@ import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { UserEdit, UserModel } from '@store/models/Users';
 import { useCallback, useState } from 'react';
 import userPageStyle from './userPage.module.scss'
+import { BASE_URL } from '@store/models/baseUrl/baseUrl';
+import Orders from './components/order/orders'
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 type UserPageProps = {
     user: UserModel;
@@ -11,12 +14,12 @@ type UserPageProps = {
 }
 
 const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
-
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail] = useState(user.email);
 
     const [edit, setEdit] = useState(false);
+    const [orders, setOrders] = useState(false);
 
     const handleClickEdit = () => {
         setEdit(true);
@@ -26,8 +29,7 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
     const inputLastName = useCallback((e: any) => setLastName(e.target.value), []);
     const inputEmail = useCallback((e: any) => setEmail(e.target.value), []);
 
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+    const apiStore = new ApiStore(BASE_URL);
 
     const handleClickSave = () => {
         async function editUser() {
@@ -47,6 +49,10 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
         setEdit(false);
     };
 
+    const handleGetOrders = () => {
+        setOrders(!orders)
+    }
+
     return (
         <div className={userPageStyle.userPage}>
             <UserImage />
@@ -55,14 +61,14 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                     <div className={userPageStyle.userPage__Str__GrayText}>Имя:&nbsp;</div>
                     {
                         edit?<input type='text' placeholder={user.firstName} onChange={inputFirstName} />:
-                        <div className={userPageStyle.userPage__Str__Text}>{user.firstName}</div>
+                        <div className={userPageStyle.userPage__Str__Text}>{firstName}</div>
                     }
                 </div>
                 <div className={userPageStyle.userPage__Str}>
                     <div className={userPageStyle.userPage__Str__GrayText}>Фамилия:&nbsp;</div>
                     {
                         edit?<input type='text' placeholder={user.lastName} onChange={inputLastName} />:
-                        <div className={userPageStyle.userPage__Str__Text}>{user.lastName}</div>
+                        <div className={userPageStyle.userPage__Str__Text}>{lastName}</div>
                     }
                 </div>
                 <div className={userPageStyle.userPage__Str}>
@@ -83,8 +89,10 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                     <div className={userPageStyle.userPage__Button} onClick={handleClickEdit}>Редактировать профиль</div>
                 }
                 <div className={userPageStyle.userPage__Button} onClick={handleClickExit}>Выйти</div>
-                <div className={userPageStyle.userPage__BoldText}>Заказы:</div>
-                <div className={userPageStyle.userPage__Text}>У Вас пока нет ни одного заказа, надо это исправить!</div>
+                <div className={userPageStyle.userPage__BoldText}>Заказы
+                    {orders?<CaretUpOutlined  className={userPageStyle.userPage__UpDown} onClick={handleGetOrders}/>: <CaretDownOutlined className={userPageStyle.userPage__UpDown} onClick={handleGetOrders}/>}
+                </div>
+                <Orders flag={orders}/>
             </div>
         </div>
     )

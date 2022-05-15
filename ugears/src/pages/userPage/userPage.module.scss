@@ -12,6 +12,7 @@
         flex-direction: column;
         align-items: center;
         margin-left: 20px;
+        overflow: visible;
     }
 
     &__Button {
@@ -44,6 +45,10 @@
         font-weight: 800;
         color: $brown;
         margin-top: 15px;
+    }
+
+    &__UpDown {
+        margin: 10px;
     }
 
     &__Text {

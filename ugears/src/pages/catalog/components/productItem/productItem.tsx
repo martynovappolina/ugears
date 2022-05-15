@@ -2,8 +2,9 @@ import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import Rating from "@components/rating";
 import ApiStore from "@shared/store/ApiStore";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
+import { BASE_URL } from "@store/models/baseUrl/baseUrl";
 import { ProductModel } from "@store/models/Products";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useUgearsContext } from "../../../../App/App";
 import Image from "./components/image";
@@ -14,14 +15,13 @@ type ProductItemProps = {
     product: ProductModel;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
-    const cartContext = useUgearsContext();
-    
+const ProductItem: React.FC<ProductItemProps> = ({ product }) => {  
     const linkStyle = {
         textDecoration: 'none', 
         color: 'black'
     }
-
+    const apiStore = new ApiStore(BASE_URL);
+    const cartContext = useUgearsContext();
     const [favourite, setFavourite] = useState(false)
     const changeFavourite = () => {
         setFavourite(!favourite);
@@ -37,8 +37,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
         );
         if(n>0) setCart(true);
     }, []);
-    //const apiStore = new ApiStore('http://localhost:8080/api/');
-    const apiStore = new ApiStore('https://gears4us.ru/api/');
+
     const changeCart = () => {
         setCart(!cart);
         async function addCart() {
