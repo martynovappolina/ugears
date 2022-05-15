@@ -22,9 +22,14 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
             //url = `${url}?${qs.stringify(params.data)}`
         }
 
-        if (params.method === HTTPMethod.POST || params.method === HTTPMethod.PUT) {
+        if (params.method === HTTPMethod.POST) {
             body =  JSON.stringify(params.data)
-            //headers ['Content-Type'] = 'application/json;charset=UTF-8'
+            headers['Content-Type'] = 'application/json;charset=UTF-8'
+        }
+
+        if (params.method === HTTPMethod.PUT) {
+            if(params.stringify) body =  JSON.stringify(params.data)
+            else body = params.data
         }
 
         try {

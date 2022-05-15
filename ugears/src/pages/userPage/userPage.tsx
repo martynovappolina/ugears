@@ -33,10 +33,11 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
 
     const handleClickSave = () => {
         async function editUser() {
-            const response = await apiStore.request<UserEdit>( {
+            const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
                 endpoint: 'profile/edit',
                 headers: {},
+                stringify: true,
                 data: {
                     "firstName": firstName,
                     "lastName": lastName,
@@ -55,19 +56,19 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
 
     return (
         <div className={userPageStyle.userPage}>
-            <UserImage />
+            <UserImage avatar={"https://storage.yandexcloud.net/gears4us/" + user.avatar}/>
             <div className={userPageStyle.userPage__Info}>
                 <div className={userPageStyle.userPage__Str}>
                     <div className={userPageStyle.userPage__Str__GrayText}>Имя:&nbsp;</div>
                     {
-                        edit?<input type='text' placeholder={user.firstName} onChange={inputFirstName} />:
+                        edit?<input type='text' value={user.firstName} onChange={inputFirstName} />:
                         <div className={userPageStyle.userPage__Str__Text}>{firstName}</div>
                     }
                 </div>
                 <div className={userPageStyle.userPage__Str}>
                     <div className={userPageStyle.userPage__Str__GrayText}>Фамилия:&nbsp;</div>
                     {
-                        edit?<input type='text' placeholder={user.lastName} onChange={inputLastName} />:
+                        edit?<input type='text' value={user.lastName} onChange={inputLastName} />:
                         <div className={userPageStyle.userPage__Str__Text}>{lastName}</div>
                     }
                 </div>
@@ -78,14 +79,15 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                 <div className={userPageStyle.userPage__Str}>
                     <div className={userPageStyle.userPage__Str__GrayText}>Электронная почта:&nbsp;</div>
                     {
-                        edit?<input type='text' placeholder={user.email} onChange={inputEmail} />:
+                        edit?<input type='text' value={user.email} onChange={inputEmail} />:
                         <div className={userPageStyle.userPage__Str__Text}>{user.email}</div>
                     }
                 </div>
                 {
                     edit?
                     <><div className={userPageStyle.userPage__Button} onClick={handleClickSave}>Сохранить изменения</div>
-                    <div className={userPageStyle.userPage__MiniText}>(Для того, чтобы увидеть изменения, обновите страницу.)</div> </>:
+                    {/* <div className={userPageStyle.userPage__MiniText}>(Для того, чтобы увидеть изменения, обновите страницу.)</div>  */}
+                    </>:
                     <div className={userPageStyle.userPage__Button} onClick={handleClickEdit}>Редактировать профиль</div>
                 }
                 <div className={userPageStyle.userPage__Button} onClick={handleClickExit}>Выйти</div>

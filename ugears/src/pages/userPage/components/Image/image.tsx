@@ -1,14 +1,18 @@
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
-import { DropImageProps } from '@store/models/Users';
-import { DragEvent, useState } from 'react';
+import React, { DragEvent, useEffect, useMemo, useState } from 'react';
 import imageStyle from './image.module.scss'
 
-const UserImage = () => {
+type UserImageProps = {
+    avatar: string;
+}
+
+const UserImage: React.FC<UserImageProps> = ({ avatar }) => {
 
     const [drag, setDrag] = useState(false);
-
+    const [update, setUpdate] = useState(false);
+   
     const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         setDrag(true);
@@ -25,35 +29,34 @@ const UserImage = () => {
         e.preventDefault();
         let files = [...e.dataTransfer.files];
         const formData = new FormData();
-        formData.append('file', files[0]);
+        formData.append('avatarImage', files[0]);
 
         async function dropImage() {
-            const response = await apiStore.request<DropImageProps>( {
+            const response = await apiStore.request<FormData>( {
                 method: HTTPMethod.PUT,
-                mode: 'no-cors',
                 endpoint: 'profile/avatar',
                 enctype: 'multipart/form-data',
-                headers:
-                {
-                    'Content-Type': `multipart/form-data`,
-                },
-                data: {
-                    avatarImage: formData,
-                },
+                headers: {},
+                data: formData,
                 withCredentials: 'include',
             });
         };
         dropImage();
         setDrag(false);
+        setUpdate(true);
     }
-
+    
+     if(avatar === 'https://storage.yandexcloud.net/gears4us/some_default_path')
     return (<>
+    {
+         update?
+         <div className={imageStyle.ImageDownload}>Обновите страницу, чтобы увидеть изменения</div>:
         <div
         onDragStart={e => dragStartHandler(e)}
         onDragLeave={e => dragLeaveHandler(e)}
         onDragOver={e => dragStartHandler(e)} 
         onDrop = {e => onDropHandler(e)}
-        className={imageStyle.Image}>Место для Вашей фотографии<br/> 
+        className={imageStyle.ImageDownload}>Место для Вашей фотографии<br/> 
         {
             drag?
             <div 
@@ -63,8 +66,11 @@ const UserImage = () => {
             className={imageStyle.Image__Link}>Отпустите файл, чтобы загрузить</div>:
             <div className={imageStyle.Image__Link}>Перетащите файл, чтобы загрузить</div>
         }
-        </div>
+        </div>}
     </>)
+    return (
+        <img className={imageStyle.Image} src={avatar} />
+    )
 };
 
-export default UserImage;
+export default React.memo(UserImage);

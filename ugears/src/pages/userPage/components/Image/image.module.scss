@@ -1,10 +1,9 @@
 @import '@styles/variables.scss';
 
-.Image {
+.Image, .ImageDownload {
     width: 300px;
     height: 350px;
     background: $green;
-    opacity: 0.5;
     border: dashed 2px $green;
     display: flex;
     flex-direction: column;
@@ -12,6 +11,7 @@
     justify-content: center;
     color: $brown;
     text-align: center;
+    object-fit: cover;
 
     &__Link {
         text-decoration: underline;
@@ -21,4 +21,9 @@
         }
     }
 }
+
+.ImageDownload {
+    opacity: 0.5;
+}
+
 

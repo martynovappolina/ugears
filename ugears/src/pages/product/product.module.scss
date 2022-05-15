@@ -62,3 +62,42 @@
         display: flex;
     }
 }
+
+.edit {
+
+    &__textarea {
+        width: 500px;
+        height: 250px;
+    }
+
+    &__buttonBox {
+        position: absolute;
+        top: 130px;
+        right: 200px;
+        height: 80px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    &__button, &__buttonSave {
+        background: $blue;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 110px;
+        height: 35px;
+        font-size: 14px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__buttonSave {
+        width: 180px;
+        margin-top: 10px;
+    }
+}
