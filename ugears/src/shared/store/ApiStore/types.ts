@@ -9,8 +9,9 @@ export enum HTTPMethod {
 export type RequestParams<ReqT> = {
     method: HTTPMethod;
     enctype?: string;
+    stringify?: boolean;
     endpoint: string; 
-    headers: Record<string, string> | Headers | undefined;
+    headers: Record<string, any>;
     mode?: 'cors' | 'no-cors',
     data: ReqT | null;
     withCredentials?: RequestCredentials;

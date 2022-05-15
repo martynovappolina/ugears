@@ -27,10 +27,6 @@ export type UserApi = {
     email: string;
 }
 
-export type DropImageProps = {
-    avatarImage: FormData;
-}
-
 export type UserModel = {
     userID: number;   
     username: string;
