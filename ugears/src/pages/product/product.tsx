@@ -56,7 +56,7 @@ const Product = () => {
     }
 
     const handleClickSave = () => {
-        async function editUser() {
+        async function editProduct() {
             const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
                 endpoint: '',
@@ -65,7 +65,7 @@ const Product = () => {
                 data: {
                     "title": title,
                     "price": price,
-                    "number_of_parts": numberOfParts,
+                    "parts_amount": numberOfParts,
                     "size": size,
                     "assembly_time": assemblyTime,
                     "description": description,
@@ -73,7 +73,7 @@ const Product = () => {
                 withCredentials: 'include',
             }); 
         };
-        editUser();
+        editProduct();
         setEdit(false);
     };
     

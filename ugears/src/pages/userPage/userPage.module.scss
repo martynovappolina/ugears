@@ -62,3 +62,20 @@
     }
 
 }
+
+.add {
+    &__buttonBox {
+        
+    }
+
+    &__button {
+        background-color: $green;
+        padding: 5px 20px;
+        color: white;
+        margin-top: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
