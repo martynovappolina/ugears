@@ -14,6 +14,7 @@ type UserPageProps = {
 }
 
 const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
+    const admin = true;
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail] = useState(user.email);
@@ -89,6 +90,11 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                     {/* <div className={userPageStyle.userPage__MiniText}>(Для того, чтобы увидеть изменения, обновите страницу.)</div>  */}
                     </>:
                     <div className={userPageStyle.userPage__Button} onClick={handleClickEdit}>Редактировать профиль</div>
+                }
+                {
+                    admin? <div className={userPageStyle.add__buttonBox}>
+                        <div className={userPageStyle.add__button}>Добавить пользователя</div>
+                    </div>:null
                 }
                 <div className={userPageStyle.userPage__Button} onClick={handleClickExit}>Выйти</div>
                 <div className={userPageStyle.userPage__BoldText}>Заказы

@@ -12,6 +12,7 @@ const UserImage: React.FC<UserImageProps> = ({ avatar }) => {
 
     const [drag, setDrag] = useState(false);
     const [update, setUpdate] = useState(false);
+    const [file, setFile] = useState('')
    
     const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -44,13 +45,14 @@ const UserImage: React.FC<UserImageProps> = ({ avatar }) => {
         dropImage();
         setDrag(false);
         setUpdate(true);
+        setFile(files[0].name);
     }
     
-     if(avatar === 'https://storage.yandexcloud.net/gears4us/some_default_path')
+    if(avatar === 'https://storage.yandexcloud.net/gears4us/some_default_path')
     return (<>
     {
-         update?
-         <div className={imageStyle.ImageDownload}>Обновите страницу, чтобы увидеть изменения</div>:
+        update?
+        <div className={imageStyle.ImageDownload}>Обновите страницу, чтобы увидеть изменения, загруженный файл: {file}</div>:
         <div
         onDragStart={e => dragStartHandler(e)}
         onDragLeave={e => dragLeaveHandler(e)}

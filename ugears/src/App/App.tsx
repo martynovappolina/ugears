@@ -13,6 +13,7 @@ import CartStore from "@store/CartStore/CartStore";
 import ApiStore from "@shared/store/ApiStore";
 import { HTTPMethod } from "@shared/store/ApiStore/types";
 import { BASE_URL } from "@store/models/baseUrl/baseUrl";
+import AddProduct from "@pages/addProduct";
 
 
 const context = React.createContext({
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/product/:id" component={Product} />
           <Route path="/autho" component={Authorization} />
           <Route path="/cart" component={Cart} />
+          <Route path="/addproduct" component={AddProduct} />
           <Redirect to="/products"/>
         </BrowserRouter>
       </Provider>
