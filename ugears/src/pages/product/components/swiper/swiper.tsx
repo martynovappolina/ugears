@@ -83,8 +83,10 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url }) => {
                         )}
                     </div>
                 </div>
-                <VideoPlayerMini url = {video_url}/>
-                <div onClick={changeVideoTrue} className='mini-slider-box__video' />
+                {video_url? <>
+                    <VideoPlayerMini url = {video_url} />
+                    <div onClick={changeVideoTrue} className='mini-slider-box__video' />
+                    </>: null}
             </div>
 
             { video? <VideoPlayer url = {video_url}/>:null }

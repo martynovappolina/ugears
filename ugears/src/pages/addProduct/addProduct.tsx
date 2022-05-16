@@ -2,6 +2,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
+import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { DragEvent, useCallback, useState } from 'react';
 import productStyle from './addProduct.module.scss'
 
@@ -14,8 +15,7 @@ const AddProduct = () => {
     const inputDescription = useCallback((e: any) => setDescription(e.target.value), []);
     const [price, setPrice] = useState(0);
     const inputPrice = useCallback((e: any) => setPrice(e.target.value), []);
-    const [availability, setAvailability] = useState(false);
-    const inputAvailability = useCallback((e: any) => setAvailability(e.target.value), []);
+    const [availability, setAvailability] = useState(true);
     const [numberOfParts, setNumberOfParts] = useState(0);
     const inputNumberOfParts = useCallback((e: any) => setNumberOfParts(e.target.value), []);
     const [size, setSize] = useState('');
@@ -78,7 +78,7 @@ const AddProduct = () => {
 
     const [dragVideo, setDragVideo] = useState(false);
     const [formDataVideo, setFormDataVideo] = useState<FormData>();
-    const [video, setVideo] = useState<string[]>();
+    const [video, setVideo] = useState<string>();
    
     const dragStartHandlerVideo = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -98,10 +98,9 @@ const AddProduct = () => {
 
         setDragVideo(false);
         setFormDataVideo(formData);
-        setVideo(imgs);
+        setVideo(filesVideo[0].name);
         setUpVid(true);
     }
-
 
     const [save, setSave] = useState(false);
 
@@ -180,7 +179,7 @@ const AddProduct = () => {
                     }
                     </div>
                 }
-                <div className={productStyle.img__button} onClick={saveImage}>Сохранить</div>
+                <div className={productStyle.img__button} onClick={saveVideo}>Сохранить</div>
             </div>
 
             <div className={productStyle.product__textLine}>
@@ -211,6 +210,11 @@ const AddProduct = () => {
             <div className={productStyle.product__textLine}>
                 <div className={productStyle.product__text}>Количество деталей:</div>
                 <input type='text' className={productStyle.product__input} onChange={inputNumberOfParts} />
+            </div>
+
+            <div className={productStyle.product__textLine}>
+                <div className={productStyle.product__text}>Размер:</div>
+                <input type='text' className={productStyle.product__input} onChange={inputSize} />
             </div>
 
             <div className={productStyle.product__buttonBox}>
