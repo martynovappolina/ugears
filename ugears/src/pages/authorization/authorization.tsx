@@ -99,6 +99,7 @@ const Authorization = () => {
             const response = await apiStore.request<UserSignUp>( {
                 method: HTTPMethod.POST,
                 endpoint: 'auth/signup',
+                stringify: true,
                 headers: {},
                 data: {
                     "username": newLogin,
@@ -119,7 +120,7 @@ const Authorization = () => {
         }
         else setPassNotMatch(true);
     }, [newLogin, newPassword, newRepeatPassword, newEmail])
-
+    
     if(autho) return (
         <UserPage user={userStore.user} handleClickExit={handleClickExit} />
     );

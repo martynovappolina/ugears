@@ -11,10 +11,23 @@ import Reviews from './components/reviews';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import ApiStore from '@shared/store/ApiStore';
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
+import RoleStore from '@store/RoleStore';
 
 const Product = () => {
     const { id } = useParams<{id: string}>();
-    const admin = true;
+    
+    const roleStore = useLocalStore(() => new RoleStore());
+    const [admin, setAdmin] = useState(false);
+    const [manager, setManager] = useState(false);
+
+    useEffect(() => {
+        roleStore.getRole();
+        roleStore.roles.map((r) => {
+            if(r==="Manager") setManager(true);
+            if(r==="Admin") setAdmin(true);
+        })
+    })
+
     const [edit, setEdit] = useState(false);
     const [remove, setRemove] = useState(false);
 
@@ -87,7 +100,7 @@ const Product = () => {
 
     if(productStore.product) return (<>
         <div className={productStyle.product}>
-            <SwiperItem images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl}/> 
+            <SwiperItem images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl} edit={edit}/> 
             <div className={productStyle.product__Info}>
                 {edit?<input type='text' value={productStore.product.title} onChange={inputTitle} />: 
                 <div className={productStyle.product__Title}>{productStore.product.title}</div>}

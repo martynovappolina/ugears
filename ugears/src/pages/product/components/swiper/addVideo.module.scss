@@ -1,0 +1,21 @@
+@import '@styles/variables.scss';
+
+.video {
+
+    &__downloadBox {
+        color: $brown;
+        font-size: 12px;
+        width: 100px;
+        height: 100px;
+        background: $green;
+        border: dashed 2px $green;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        object-fit: cover;
+    }
+}
+
+

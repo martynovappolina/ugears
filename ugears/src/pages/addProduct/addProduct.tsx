@@ -2,7 +2,6 @@ import { PlusOutlined } from '@ant-design/icons';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
-import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { DragEvent, useCallback, useState } from 'react';
 import productStyle from './addProduct.module.scss'
 
@@ -230,6 +229,11 @@ const AddProduct = () => {
                     <div className={productStyle.product__buttonText}>Добавить видео</div>}
                 </div>
             </div>
+            
+            {
+                save? <div className={productStyle.product__textSave}> Продукт сохранен! </div>:
+                <div className={productStyle.product__buttonSave} onClick={handleClickSave}>Сохранить</div>
+            }    
 
         </div>
     );

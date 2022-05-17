@@ -6,9 +6,6 @@ import User from './components/user';
 import headerStyle from './header.module.scss'
 
 const Header = () => {
-    const [askVisible, setAskVisible] = useState(false);
-
-    const askClick = () => setAskVisible(!askVisible);
 
     return (
         <div className={headerStyle.header}>
@@ -17,10 +14,9 @@ const Header = () => {
             <div className={headerStyle.header__link}>Избранное</div>
             <NavLink className={headerStyle.header__link} style={{ textDecoration: 'none', color: 'black' }} to={"/cart"}>Корзина</NavLink>
             <div className={headerStyle.header__icons}>
-                <div className={headerStyle.header__icon} onClick={askClick}><AskIcon /></div>
+                <NavLink to={'/ask'} className={headerStyle.header__icon}><AskIcon /></NavLink>
                 <NavLink className={headerStyle.header__icon} to={"/autho"}><User /></NavLink>
             </div>
-            <Ask visible={askVisible}/>
         </div>
     )
 };
