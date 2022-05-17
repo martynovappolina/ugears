@@ -2,7 +2,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
-import { DragEvent, useCallback, useState } from 'react';
+import ProductsListStore from '@store/ProductsListStore';
+import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
+import { DragEvent, useCallback, useEffect, useState } from 'react';
 import productStyle from './addProduct.module.scss'
 
 const AddProduct = () => {
@@ -55,11 +57,11 @@ const AddProduct = () => {
         let i = 1, imgs = [''];
         const formData = new FormData();
         filesImg.map((img) => {
-            formData.append(`img${i}`, img);
+            formData.append(`avatarImage${i}`, img);
             i++;
             imgs.push(img.name);
         })
-
+        formData.append('avatarAmount', String(i-1));
         setDragImg(false);
         setFormDataImgs(formData);
         setImgs(imgs);
@@ -104,6 +106,16 @@ const AddProduct = () => {
     const [save, setSave] = useState(false);
 
     const apiStore = new ApiStore(BASE_URL);
+    const productsStore = useLocalStore(() => new ProductsListStore());
+    const [lastID, setLastID] = useState(0);
+
+    useEffect(() => {
+        productsStore.getProductsListAll();
+    }, [])
+    useEffect(() => {
+        setLastID(productsStore.list.length)
+    }, [productsStore.list])
+
     const handleClickSave = () => {
         async function postProduct() {
             const response = await apiStore.request( {
@@ -124,7 +136,21 @@ const AddProduct = () => {
                 withCredentials: 'include',
             }); 
         };
+        formDataImgs?.forEach((value,key) => { console.log(key+" "+value) })
+        async function dropImage() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.PUT,
+                endpoint: `product/${lastID}/avatar`,
+                enctype: 'multipart/form-data',
+                headers: {},
+                data: {
+                    formDataImgs,
+                },
+                withCredentials: 'include',
+            });
+        };
         postProduct();
+        dropImage();
         setSave(true);
     };
 

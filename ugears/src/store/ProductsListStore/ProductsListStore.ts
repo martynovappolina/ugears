@@ -25,7 +25,8 @@ export default class ProductsListStore implements ILocalStore {
             list: computed,
             meta: computed,
             totalCount: computed,
-            getProductsList: action
+            getProductsList: action,
+            getProductsListAll: action,
         })
     }
 
@@ -39,6 +40,40 @@ export default class ProductsListStore implements ILocalStore {
 
     get totalCount(): number {
         return this._totalCount;
+    }
+
+    async getProductsListAll(): Promise<void> {
+        this._meta = Meta.loading;
+        this._list = getInitialCollectionModel();
+
+        const response = await this._apiStore.request<ProductApi[]>( {
+            method: HTTPMethod.GET,
+            endpoint: `products/feed`,
+            headers: {},
+            data: null,
+            //withCredentials: 'include',
+        }); 
+        
+        runInAction(() => {
+            if(!response.success) {
+                this._meta = Meta.error;
+            }
+
+            try {
+                const list: ProductModel[] = [];
+                for (const item of response.data) {
+                    list.push(normalizeProduct(item));
+                }
+                this._meta = Meta.success;
+                this._list = normalizeCollection(list, (listItem) => listItem.id);
+                return;
+            } catch (e) {
+                this._meta = Meta.error;
+                this._list = getInitialCollectionModel();
+                console.log("ProductsListStore:" + e)
+            }
+
+        })
     }
 
     async getProductsList(params: getProductsListParams): Promise<void> {

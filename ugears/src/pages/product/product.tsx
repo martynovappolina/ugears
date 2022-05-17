@@ -22,11 +22,14 @@ const Product = () => {
 
     useEffect(() => {
         roleStore.getRole();
-        roleStore.roles.map((r) => {
-            if(r==="Manager") setManager(true);
-            if(r==="Admin") setAdmin(true);
-        })
+    }, []) 
+
+    useEffect(() => {
+      roleStore.roles.map((r) => {
+        if(r==='Manager') setManager(true);
+        if(r==='Admin') setAdmin(true);
     })
+    }, [roleStore.roles])
 
     const [edit, setEdit] = useState(false);
     const [remove, setRemove] = useState(false);
@@ -67,7 +70,7 @@ const Product = () => {
         remove();
         setRemove(true);
     }
-
+    
     const handleClickSave = () => {
         async function editProduct() {
             const response = await apiStore.request( {
@@ -91,8 +94,8 @@ const Product = () => {
     };
     
     useEffect(() => {
-        productStore.getProduct({id: id})},
-    []); 
+        productStore.getProduct({id: id})
+    }, []); 
 
     const changeDescription = () => {
         setFullDescription(!fullDescription);
@@ -131,7 +134,7 @@ const Product = () => {
         </div>
 
         {
-            admin? edit? null:
+            (admin || manager)? edit? null:
                 <div className={productStyle.edit__buttonBox}>
                     <div className={productStyle.edit__button} onClick={handleClickEdit}>Редактировать</div>
                     {remove? <div>Продукт удален!</div>: <div className={productStyle.edit__button} onClick={handleClickRemove}>Удалить продукт</div>}

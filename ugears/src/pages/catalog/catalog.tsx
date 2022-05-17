@@ -1,5 +1,7 @@
+import { role } from '@store/models/role/role';
 import RoleStore from '@store/RoleStore';
 import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import catalogStyle from './catalog.module.scss';
@@ -13,11 +15,14 @@ const Catalog = () => {
 
     useEffect(() => {
         roleStore.getRole();
-        roleStore.roles.map((r) => {
-            if(r==="Manager") setManager(true);
-            if(r==="Admin") setAdmin(true);
-        })
-    }) 
+    }, []) 
+
+    useEffect(() => {
+      roleStore.roles.map((r) => {
+        if(r===role.manager) setManager(true);
+        if(r===role.admin) setAdmin(true);
+    })
+    }, [roleStore.roles])
 
     return(
         <>
@@ -39,4 +44,4 @@ const Catalog = () => {
     )
 }
 
-export default Catalog;
+export default observer(Catalog);

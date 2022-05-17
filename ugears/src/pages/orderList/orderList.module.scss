@@ -1,0 +1,22 @@
+.order{
+
+    &__table {
+        display: grid;
+        width: 1050px;
+        grid-template-columns: 1fr 1fr 3fr 6fr 2fr 2fr 5fr 2fr 2fr; 
+        margin-top: 10px;
+    }
+
+    &__item {
+        padding: 3px;
+        border: solid 1px black;
+        text-align: center;
+    }
+
+    &__items {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 3fr 1fr; 
+        text-align: center;
+    }
+}
