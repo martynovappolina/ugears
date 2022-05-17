@@ -16,7 +16,7 @@ export type UserEdit = {
 }
 
 export type UserApi = {
-    userID: number;
+    user_id: number;
     username: string;
     firstName: string;
     lastName: string;
@@ -43,7 +43,7 @@ export const normalizeUser = (
     from: UserApi
 ): UserModel => ({
     username: from.username,
-    userID: from.userID,
+    userID: from.user_id,
     firstName: from.firstName,
     lastName: from.lastName,
     avatar: from.avatar,

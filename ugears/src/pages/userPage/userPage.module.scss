@@ -64,18 +64,69 @@
 }
 
 .add {
-    &__buttonBox {
-        
+    &__roleForm {
+        display: flex;
+        height: 300px;
+        height: 150px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    &__textBox {
+        display: flex;
+        height: 20px;
+        color: gray;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    &__input {
+        width: 200px;
+        margin-left: 10px;
     }
 
     &__button {
         background-color: $green;
         padding: 5px 20px;
         color: white;
-        margin-top: 10px;
+        margin-top: 5px;
 
         &:hover {
             cursor: pointer;
         }
     }
+
+    &__roleBox {
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__buttonRoleGreen, &__buttonRoleGreenActive {
+        padding: 5px;
+        height: 30px;
+        margin: 10px;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 40px;
+        color: $brown;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__buttonRoleGreenActive {
+        background: $brightGreen;
+        color: white;
+    }
+
+    &__buttonRoleGreen {
+        background: $green;
+    }
+
 }

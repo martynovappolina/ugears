@@ -1,12 +1,15 @@
 import UserImage from './components/Image/image';
 import ApiStore from '@shared/store/ApiStore';
 import { HTTPMethod } from '@shared/store/ApiStore/types';
-import { UserEdit, UserModel } from '@store/models/Users';
-import { useCallback, useState } from 'react';
+import { UserModel } from '@store/models/Users';
+import { useCallback, useEffect, useState } from 'react';
 import userPageStyle from './userPage.module.scss'
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
 import Orders from './components/order/orders'
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
+import RoleStore from '@store/RoleStore';
+import { NavLink } from 'react-router-dom';
 
 type UserPageProps = {
     user: UserModel;
@@ -14,7 +17,19 @@ type UserPageProps = {
 }
 
 const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
-    const admin = true;
+    const apiStore = new ApiStore(BASE_URL);
+    const roleStore = useLocalStore(() => new RoleStore());
+    const [admin, setAdmin] = useState(true);
+    const [manager, setManager] = useState(false);
+
+    useEffect(() => {
+        roleStore.getRole();
+        roleStore.roles.map((r) => {
+            if(r==="Manager") setManager(true);
+            if(r==="Admin") setAdmin(true);
+        })
+    })
+    
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail] = useState(user.email);
@@ -29,8 +44,6 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
     const inputFirstName = useCallback((e: any) => setFirstName(e.target.value), []);
     const inputLastName = useCallback((e: any) => setLastName(e.target.value), []);
     const inputEmail = useCallback((e: any) => setEmail(e.target.value), []);
-
-    const apiStore = new ApiStore(BASE_URL);
 
     const handleClickSave = () => {
         async function editUser() {
@@ -55,10 +68,64 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
         setOrders(!orders)
     }
 
+    const [roleForm, setRoleForm] = useState(false);
+    const [role, setRole] = useState<'Client' | 'Admin' | 'Manager'>('Client');
+    const [id, setId] = useState(0);
+    const [clickClient, setClickClient] = useState(false);
+    const [clickAdmin, setClickAdmin] = useState(false);
+    const [clickManager, setClickManager] = useState(false);
+
+    const handleClickClient = () => {
+        setClickClient(true);
+        setClickAdmin(false);
+        setClickManager(false);
+        setRole("Client");
+    }
+    const handleClickAdmin = () => {
+        setClickClient(false);
+        setClickAdmin(true);
+        setClickManager(false);
+        setRole("Admin");
+    }
+    const handleClickManager = () => {
+        setClickClient(false);
+        setClickAdmin(false);
+        setClickManager(true);
+        setRole("Manager");
+    }
+
+    const addRole = () => {
+        setRoleForm(true);
+    }
+
+    const saveRole = () => {
+        setRoleForm(false);
+
+        async function postRole() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.POST,
+                endpoint: 'profile/role',
+                stringify: true,
+                headers: {},
+                data: {
+                    "user_id": id,
+                    "role": role,
+                },
+                withCredentials: 'include',
+            }); 
+        };
+        postRole();
+
+    }
+
     return (
         <div className={userPageStyle.userPage}>
             <UserImage avatar={"https://storage.yandexcloud.net/gears4us/" + user.avatar}/>
             <div className={userPageStyle.userPage__Info}>
+                <div className={userPageStyle.userPage__Str}>
+                    <div className={userPageStyle.userPage__Str__GrayText}>ID:&nbsp;</div>
+                    <div className={userPageStyle.userPage__Str__Text}>{user.userID}</div>
+                </div>
                 <div className={userPageStyle.userPage__Str}>
                     <div className={userPageStyle.userPage__Str__GrayText}>Имя:&nbsp;</div>
                     {
@@ -92,9 +159,27 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                     <div className={userPageStyle.userPage__Button} onClick={handleClickEdit}>Редактировать профиль</div>
                 }
                 {
-                    admin? <div className={userPageStyle.add__buttonBox}>
-                        <div className={userPageStyle.add__button}>Добавить пользователя</div>
-                    </div>:null
+                    admin? roleForm?
+                    <div className={userPageStyle.add__roleForm}>
+                        <div className={userPageStyle.add__textBox}>
+                            ID пользователя:
+                            <input type='text' className={userPageStyle.add__input} />
+                        </div>
+                        <div className={userPageStyle.add__roleBox}>
+                            <div className={clickClient? userPageStyle.add__buttonRoleGreenActive: userPageStyle.add__buttonRoleGreen} onClick={handleClickClient}>Клиент</div>
+                            <div className={clickAdmin? userPageStyle.add__buttonRoleGreenActive: userPageStyle.add__buttonRoleGreen} onClick={handleClickAdmin}>Администратор</div>
+                            <div className={clickManager? userPageStyle.add__buttonRoleGreenActive: userPageStyle.add__buttonRoleGreen} onClick={handleClickManager}>Менеджер</div>
+                        </div>
+                        <div className={userPageStyle.add__button} onClick={saveRole}>Сохранить</div>
+                    </div>:
+                    <div className={userPageStyle.add__buttonBox}>
+                        <div className={userPageStyle.add__button} onClick={addRole}>Добавить роль пользователю</div>
+                    </div>:
+                    null
+                }
+                {
+                    (admin || manager)? 
+                    <NavLink to={'/orders'} style={{ textDecoration: 'none' }} className={userPageStyle.add__button}>Перейти к базе с заказами</NavLink>: null
                 }
                 <div className={userPageStyle.userPage__Button} onClick={handleClickExit}>Выйти</div>
                 <div className={userPageStyle.userPage__BoldText}>Заказы
