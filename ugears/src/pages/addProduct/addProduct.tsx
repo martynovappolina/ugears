@@ -95,7 +95,7 @@ const AddProduct = () => {
         e.preventDefault();
         let filesVideo = [...e.dataTransfer.files];
         const formData = new FormData();
-        formData.append('video', filesVideo[0]);
+        formData.append('avatarVideo', filesVideo[0]);
 
         setDragVideo(false);
         setFormDataVideo(formData);
@@ -143,14 +143,23 @@ const AddProduct = () => {
                 endpoint: `product/${lastID}/avatar`,
                 enctype: 'multipart/form-data',
                 headers: {},
-                data: {
-                    formDataImgs,
-                },
+                data: formDataImgs,
+                withCredentials: 'include',
+            });
+        };
+        async function dropVideo() {
+            const response = await apiStore.request( {
+                method: HTTPMethod.PUT,
+                endpoint: `product/${lastID}/avatar/video`,
+                enctype: 'multipart/form-data',
+                headers: {},
+                data: formDataVideo,
                 withCredentials: 'include',
             });
         };
         postProduct();
         dropImage();
+        dropVideo();
         setSave(true);
     };
 

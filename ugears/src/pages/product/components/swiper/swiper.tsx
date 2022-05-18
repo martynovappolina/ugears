@@ -14,9 +14,10 @@ type SwiperProps = {
     images_urls: string[],
     video_url: string, 
     edit: boolean,
+    id: string | number,
 }
 
-const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => {
+const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id }) => {
 
     new Swiper('.image-slider',
     {
@@ -73,7 +74,6 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
     }
 
     const [dragVideo, setDragVideo] = useState(false);
-    const [formDataVideo, setFormDataVideo] = useState<FormData>();
     const [videoName, setVideoName] = useState<string>();;
     const [upVid, setUpVid] = useState(false);
 
@@ -93,28 +93,24 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
         e.preventDefault();
         let filesVideo = [...e.dataTransfer.files];
         const formData = new FormData();
-        formData.append('video', filesVideo[0]);
+        formData.append('avatarVideo', filesVideo[0]);
 
         async function editProduct() {
             const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
-                endpoint: '',
-                stringify: true,
+                endpoint: `product/${id}/avatar/video`,
                 headers: {},
-                data: {
-
-                },
+                data: formData,
                 withCredentials: 'include',
             }); 
         };
         editProduct();
 
         setDragVideo(false);
-        setFormDataVideo(formData);
         setVideoName(filesVideo[0].name);
         setUpVid(true);
     }
-
+    console.log(video_url)
     return (
         <div className='swiper-body'>
             <div className='mini-slider-box'>
@@ -133,7 +129,7 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
                 </div>
                 {video_url? 
                     <>
-                        <VideoPlayerMini url = {video_url} />
+                        <VideoPlayerMini url = {"https://storage.yandexcloud.net/gears4us/" + video_url} />
                         <div onClick={changeVideoTrue} className='mini-slider-box__video' />
                     </>: 
                     edit? 

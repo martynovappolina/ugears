@@ -1,11 +1,17 @@
+import videoStyle from './video.module.scss'
+
 type VideoPlayerMiniProps = {
     url: string;
 }
 
 const VideoPlayerMini: React.FC <VideoPlayerMiniProps> = ({ url }) => {
+    
+    
     return (
-        <iframe width="100" height="90" frameBorder="0" src={url + '?mute=1&controls=0'} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-    )
+        <video className={videoStyle.video} muted autoPlay loop>
+            <source src = {url} type = "video/mp4"/>
+        </video>
+        )
 };
 
 export default VideoPlayerMini;

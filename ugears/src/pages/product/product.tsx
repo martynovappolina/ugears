@@ -49,8 +49,8 @@ const Product = () => {
     const inputNumberOfParts = useCallback((e: any) => setNumberOfParts(e.target.value), []);
     const [size, setSize] = useState(productStore.product.size);
     const inputSize = useCallback((e: any) => setSize(e.target.value), []);
-    const [assemblyTime, setAssemblyTime] = useState(productStore.product.assemblyTime);
-    const inputAssemblyTime = useCallback((e: any) => setAssemblyTime(e.target.value), []);
+    const [assemblyTime, setAssemblyTime] = useState(0);
+    const inputAssemblyTime = useCallback((e: any) => setAssemblyTime(Number(e.target.value)), []);
     const [description, setDescription] = useState(productStore.product.description);
     const inputDescription = useCallback((e: any) => setDescription(e.target.value), []);
 
@@ -75,13 +75,14 @@ const Product = () => {
         async function editProduct() {
             const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
-                endpoint: '',
+                endpoint: `product/${id}`,
                 stringify: true,
                 headers: {},
                 data: {
                     "title": title,
                     "price": price,
                     "parts_amount": numberOfParts,
+                    "availability": true,
                     "size": size,
                     "assembly_time": assemblyTime,
                     "description": description,
@@ -89,6 +90,7 @@ const Product = () => {
                 withCredentials: 'include',
             }); 
         };
+
         editProduct();
         setEdit(false);
     };
@@ -103,32 +105,34 @@ const Product = () => {
 
     if(productStore.product) return (<>
         <div className={productStyle.product}>
-            <SwiperItem images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl} edit={edit}/> 
+            <SwiperItem images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl} edit={edit} id={productStore.product.id}/> 
             <div className={productStyle.product__Info}>
-                {edit?<input type='text' value={productStore.product.title} onChange={inputTitle} />: 
+                {edit?<input type='text' placeholder={productStore.product.title} onChange={inputTitle} />: 
                 <div className={productStyle.product__Title}>{productStore.product.title}</div>}
                 <div className={productStyle.product__SmallText}>Артикул: {productStore.product.id}</div>
                 <Rating stars={productStore.product.rating} />
-                {edit?<input type='text' value={productStore.product.price} onChange={inputPrice} />:
+                {edit?<input type='text' placeholder={String(productStore.product.price)} onChange={inputPrice} />:
                 <div className={productStyle.product__Price}>{productStore.product.price}руб.</div>}
                 
-                {edit?<input type='text' value={productStore.product.numberOfParts} onChange={inputNumberOfParts} />:
+                {edit?<input type='text' placeholder={String(productStore.product.numberOfParts)} onChange={inputNumberOfParts} />:
                 <div className={productStyle.product__TextBox}>Количество деталей:&nbsp; <div className={productStyle.product__Text}>{productStore.product.numberOfParts}</div></div>}
                 
-                {edit?<input type='text' value={productStore.product.size} onChange={inputSize} />:
+                {edit?<input type='text' placeholder={productStore.product.size} onChange={inputSize} />:
                 <div className={productStyle.product__TextBox}>Размер:&nbsp; <div className={productStyle.product__Text}>{productStore.product.size}</div></div>}
                 
-                {edit?<input type='text' value={productStore.product.assemblyTime} onChange={inputAssemblyTime} />:
+                {edit?<input type='text' placeholder='Количество минут' onChange={inputAssemblyTime} />:
                 <div className={productStyle.product__TextBox}>Время сборки:&nbsp; <div className={productStyle.product__Text}>{productStore.product.assemblyTime}</div></div>}
 
-                {edit?<textarea className={productStyle.edit__textarea} value={productStore.product.description} onChange={inputDescription} />:
+                {edit?<textarea className={productStyle.edit__textarea} placeholder={productStore.product.description} onChange={inputDescription} />:
                 <div className={fullDescription? productStyle.product__DescriptionActive: productStyle.product__Description}>
                     <div className={productStyle.product__Description__Button} onClick={changeDescription}>Описание: {
                         fullDescription? <CaretUpOutlined />: <CaretDownOutlined /> 
                     }</div>
                     {productStore.product.description}
                 </div>}
-                {   edit? <div className={productStyle.edit__buttonSave} onClick={handleClickSave} >Сохранить изменения</div>:
+                {   edit? <>
+                    Чтобы увидеть изменения, обновите страницу 
+                    <div className={productStyle.edit__buttonSave} onClick={handleClickSave} >Сохранить изменения</div></>:
                     <CartBox availability={productStore.product.availability} cartActive={false} favouriteActive={false} id={id} />}
             </div>      
         </div>
