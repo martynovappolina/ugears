@@ -69,7 +69,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
 
     return(
         <div className={productItemStyle.product}>
-            <Image src={product.imagesUrls[0]} alt={product.title}/>
+            <Image src={product.imagesUrls? (product.id>9 || product.id===1)? 'https://storage.yandexcloud.net/gears4us/'+product.imagesUrls[0]: product.imagesUrls[0]: ''} alt={product.title}/>
             <div className={productItemStyle.product__Info}>
                 <NavLink to={`/product/${product.id}`} style={linkStyle} className={productItemStyle.product__Title}>{product.title}</NavLink>
                 <div className={productItemStyle.product__Price}>{product.price} руб</div>

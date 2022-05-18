@@ -105,7 +105,12 @@ const Product = () => {
 
     if(productStore.product) return (<>
         <div className={productStyle.product}>
-            <SwiperItem images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl} edit={edit} id={productStore.product.id}/> 
+            {
+                (productStore.product.id > 9)?
+                <SwiperItem main_url='https://storage.yandexcloud.net/gears4us/' images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl} edit={edit} id={productStore.product.id}/>:
+                <SwiperItem main_url='' images_urls={productStore.product.imagesUrls} video_url={productStore.product.videoUrl} edit={edit} id={productStore.product.id}/>
+            }
+             
             <div className={productStyle.product__Info}>
                 {edit?<input type='text' placeholder={productStore.product.title} onChange={inputTitle} />: 
                 <div className={productStyle.product__Title}>{productStore.product.title}</div>}

@@ -15,9 +15,10 @@ type SwiperProps = {
     video_url: string, 
     edit: boolean,
     id: string | number,
+    main_url: string,
 }
 
-const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id }) => {
+const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id, main_url }) => {
 
     new Swiper('.image-slider',
     {
@@ -110,7 +111,7 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id })
         setVideoName(filesVideo[0].name);
         setUpVid(true);
     }
-    console.log(video_url)
+
     return (
         <div className='swiper-body'>
             <div className='mini-slider-box'>
@@ -121,7 +122,7 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id })
                         {images_urls.map((url) => 
                             <div onClick={changeVideoFalse} key={url} className='image-mini-slider__slide swiper-slide'>
                                 <div className='image-mini-slider__image'>
-                                    <img src={url} />
+                                    <img src={main_url+url} />
                                 </div>
                             </div>
                         )}
@@ -130,7 +131,7 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id })
                 {video_url? 
                     <>
                         <VideoPlayerMini url = {"https://storage.yandexcloud.net/gears4us/" + video_url} />
-                        <div onClick={changeVideoTrue} className='mini-slider-box__video' />
+                        <div className='mini-slider-box__video' />
                     </>: 
                     edit? 
                     upVid? 
@@ -156,13 +157,13 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id })
                 }
             </div>
 
-            { video? <VideoPlayer url = {video_url}/>:null }
+            {/* { video? <VideoPlayer url = {video_url}/>:null } */}
             <div style={video? hiddenStyle: undefined} className='image-slider swiper-container'>
                 <div className='image-slider__wrapper swiper-wrapper'>
                     {images_urls.map((url) => 
                         <div key={url} className='image-slider__slide swiper-slide'>
                             <div className='image-slider__image swiper-zoom-container'>
-                                <img src={url} />
+                                <img src={main_url+url} />
                                 {/* className='swiper-lazy' */}
                                 {/* <div className='swiper-lazy-preloader' /> */}
                             </div>

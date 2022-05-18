@@ -4,6 +4,7 @@ import { HTTPMethod } from '@shared/store/ApiStore/types';
 import { BASE_URL } from '@store/models/baseUrl/baseUrl';
 import ProductsListStore from '@store/ProductsListStore';
 import { useLocalStore } from '@utils/useLocalStore/useLocalStore';
+import { observer } from 'mobx-react-lite';
 import { DragEvent, useCallback, useEffect, useState } from 'react';
 import productStyle from './addProduct.module.scss'
 
@@ -120,27 +121,27 @@ const AddProduct = () => {
         async function postProduct() {
             const response = await apiStore.request( {
                 method: HTTPMethod.POST,
-                endpoint: '',
+                endpoint: 'product',
                 stringify: true,
                 headers: {},
                 data: {
                     "title": title,
-                    "price": price,
+                    "price": Number(price),
                     "category": category,
                     'availability': availability,
-                    "parts_amount": numberOfParts,
+                    "parts_amount": Number(numberOfParts),
                     "size": size,
-                    "assembly_time": assemblyTime,
+                    "assembly_time": Number(assemblyTime),
                     "description": description,
+                    "shop_id": 1,
                 },
                 withCredentials: 'include',
             }); 
         };
-        formDataImgs?.forEach((value,key) => { console.log(key+" "+value) })
         async function dropImage() {
             const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
-                endpoint: `product/${lastID}/avatar`,
+                endpoint: `product/${lastID+1}/avatar`,
                 enctype: 'multipart/form-data',
                 headers: {},
                 data: formDataImgs,
@@ -150,7 +151,7 @@ const AddProduct = () => {
         async function dropVideo() {
             const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
-                endpoint: `product/${lastID}/avatar/video`,
+                endpoint: `product/${lastID+1}/avatar/video`,
                 enctype: 'multipart/form-data',
                 headers: {},
                 data: formDataVideo,
@@ -274,4 +275,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default observer(AddProduct);

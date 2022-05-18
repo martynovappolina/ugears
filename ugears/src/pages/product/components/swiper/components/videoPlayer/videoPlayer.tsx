@@ -6,7 +6,7 @@ type VideoPlayerProps = {
 
 const VideoPlayer: React.FC <VideoPlayerProps> = ({ url }) => {
     return (
-        <video className={videoStyle.video} controls muted>
+        <video className={videoStyle.video} autoPlay muted controls>
             <source src = {url} type = "video/mp4"/>
         </video>
     )
