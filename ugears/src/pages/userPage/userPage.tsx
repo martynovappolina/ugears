@@ -19,16 +19,19 @@ type UserPageProps = {
 const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
     const apiStore = new ApiStore(BASE_URL);
     const roleStore = useLocalStore(() => new RoleStore());
-    const [admin, setAdmin] = useState(true);
+    const [admin, setAdmin] = useState(false);
     const [manager, setManager] = useState(false);
 
     useEffect(() => {
         roleStore.getRole();
-        roleStore.roles.map((r) => {
-            if(r==="Manager") setManager(true);
-            if(r==="Admin") setAdmin(true);
-        })
+    }, []) 
+
+    useEffect(() => {
+      roleStore.roles.map((r) => {
+        if(r==='Manager') setManager(true);
+        if(r==='Admin') setAdmin(true);
     })
+    }, [roleStore.roles])
     
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
@@ -101,22 +104,24 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
     const saveRole = () => {
         setRoleForm(false);
 
-        async function postRole() {
+        async function putRole() {
             const response = await apiStore.request( {
-                method: HTTPMethod.POST,
+                method: HTTPMethod.PUT,
                 endpoint: 'profile/role',
                 stringify: true,
                 headers: {},
                 data: {
-                    "user_id": id,
+                    "user_id": Number(id),
                     "role": role,
                 },
                 withCredentials: 'include',
             }); 
         };
-        postRole();
+        putRole();
 
     }
+
+    const inputId = useCallback((e: any) => setId(e.target.value), []);
 
     return (
         <div className={userPageStyle.userPage}>
@@ -163,7 +168,7 @@ const UserPage: React.FC<UserPageProps> = ({ user, handleClickExit }) => {
                     <div className={userPageStyle.add__roleForm}>
                         <div className={userPageStyle.add__textBox}>
                             ID пользователя:
-                            <input type='text' className={userPageStyle.add__input} />
+                            <input type='text' className={userPageStyle.add__input} onChange={inputId} />
                         </div>
                         <div className={userPageStyle.add__roleBox}>
                             <div className={clickClient? userPageStyle.add__buttonRoleGreenActive: userPageStyle.add__buttonRoleGreen} onClick={handleClickClient}>Клиент</div>

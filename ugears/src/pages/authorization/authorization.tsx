@@ -69,6 +69,7 @@ const Authorization = () => {
             const response = await apiStore.request<UserSignIn>( {
                 method: HTTPMethod.POST,
                 endpoint: 'auth/login',
+                stringify: true,
                 headers: {},
                 data: {
                     "username": login,
@@ -80,7 +81,7 @@ const Authorization = () => {
         };
         postUser();
         getCheckUser();
-    }, [])
+    }, [login, password])
 
     const [newLogin, setNewLogin] = useState('');
     const [newPassword, setNewPassword] = useState('')
@@ -144,10 +145,10 @@ const Authorization = () => {
                     authoStyle.formBox__form + " " + authoStyle.formBox__form__actSignIn}>
                         <h3 className={authoStyle.formBox__title}>Вход</h3>
                         <p>
-                            <Input type='text' placeholder='Логин' onChange={inputLogin} value={login} />
+                            <Input type='text' placeholder='Логин' onChange={inputLogin} />
                         </p>
                         <p>
-                            <Input type="password" placeholder='Пароль' onChange={inputPassword} value={password} />
+                            <Input type="password" placeholder='Пароль' onChange={inputPassword} />
                         </p>
                         <p>
                             <button className={authoStyle.formBox__button} onClick={signInClick}>Войти</button>

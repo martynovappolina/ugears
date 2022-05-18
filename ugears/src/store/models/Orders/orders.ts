@@ -51,3 +51,57 @@ export const getInitialOrderModel = (): OrderModel => ({
     callNeeded: false,
     status: 'Created',
 })
+
+export type OrderFullApi = {
+    id: number,
+    user_id: number,
+    items: CartApi[],
+    created_at: string,
+    total_price: number,
+    pick_up: boolean,
+    delivery_address: string,
+    payment_method: "card" | "cash",
+    call_needed: boolean,
+    status: "Created" | "Finished"
+}
+
+export type OrderFullModel = {
+    id: number,
+    userId: number,
+    items: CartModel[],
+    createdAt: string,
+    totalPrice: number,
+    pickUp: boolean,
+    deliveryAddress: string,
+    paymentMethod: "card" | "cash",
+    callNeeded: boolean,
+    status: "Created" | "Finished"
+}
+
+export const normalizeOrderFull = (
+    from: OrderFullApi
+): OrderFullModel => ({
+    id: from.id,
+    userId: from.user_id,
+    items: from.items.map((el) => normalizeCart(el)),
+    createdAt: dayjs(from.created_at).format("DD MMM"),
+    totalPrice: from.total_price,
+    pickUp: from.pick_up,
+    deliveryAddress: from.delivery_address,
+    paymentMethod: from.payment_method,
+    callNeeded: from.call_needed,
+    status: from.status,
+})
+
+export const getInitialOrderFullModel = (): OrderFullModel => ({
+    id: 0,
+    userId: 0,
+    items: [],
+    createdAt: '',
+    totalPrice: 0,
+    pickUp: false,
+    deliveryAddress: '',
+    paymentMethod: 'card',
+    callNeeded: false,
+    status: 'Created',
+})

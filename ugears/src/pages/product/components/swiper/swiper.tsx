@@ -14,9 +14,11 @@ type SwiperProps = {
     images_urls: string[],
     video_url: string, 
     edit: boolean,
+    id: string | number,
+    main_url: string,
 }
 
-const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => {
+const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit, id, main_url }) => {
 
     new Swiper('.image-slider',
     {
@@ -73,7 +75,6 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
     }
 
     const [dragVideo, setDragVideo] = useState(false);
-    const [formDataVideo, setFormDataVideo] = useState<FormData>();
     const [videoName, setVideoName] = useState<string>();;
     const [upVid, setUpVid] = useState(false);
 
@@ -93,24 +94,20 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
         e.preventDefault();
         let filesVideo = [...e.dataTransfer.files];
         const formData = new FormData();
-        formData.append('video', filesVideo[0]);
+        formData.append('avatarVideo', filesVideo[0]);
 
         async function editProduct() {
             const response = await apiStore.request( {
                 method: HTTPMethod.PUT,
-                endpoint: '',
-                stringify: true,
+                endpoint: `product/${id}/avatar/video`,
                 headers: {},
-                data: {
-
-                },
+                data: formData,
                 withCredentials: 'include',
             }); 
         };
         editProduct();
 
         setDragVideo(false);
-        setFormDataVideo(formData);
         setVideoName(filesVideo[0].name);
         setUpVid(true);
     }
@@ -125,7 +122,7 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
                         {images_urls.map((url) => 
                             <div onClick={changeVideoFalse} key={url} className='image-mini-slider__slide swiper-slide'>
                                 <div className='image-mini-slider__image'>
-                                    <img src={url} />
+                                    <img src={main_url+url} />
                                 </div>
                             </div>
                         )}
@@ -133,8 +130,8 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
                 </div>
                 {video_url? 
                     <>
-                        <VideoPlayerMini url = {video_url} />
-                        <div onClick={changeVideoTrue} className='mini-slider-box__video' />
+                        <VideoPlayerMini url = {"https://storage.yandexcloud.net/gears4us/" + video_url} />
+                        <div className='mini-slider-box__video' />
                     </>: 
                     edit? 
                     upVid? 
@@ -160,13 +157,13 @@ const SwiperItem: React.FC<SwiperProps> = ({ images_urls, video_url, edit }) => 
                 }
             </div>
 
-            { video? <VideoPlayer url = {video_url}/>:null }
+            {/* { video? <VideoPlayer url = {video_url}/>:null } */}
             <div style={video? hiddenStyle: undefined} className='image-slider swiper-container'>
                 <div className='image-slider__wrapper swiper-wrapper'>
                     {images_urls.map((url) => 
                         <div key={url} className='image-slider__slide swiper-slide'>
                             <div className='image-slider__image swiper-zoom-container'>
-                                <img src={url} />
+                                <img src={main_url+url} />
                                 {/* className='swiper-lazy' */}
                                 {/* <div className='swiper-lazy-preloader' /> */}
                             </div>

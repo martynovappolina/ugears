@@ -34,9 +34,9 @@ export default class RoleStore implements ILocalStore {
 
     async getRole(): Promise<void> {
         this._meta = Meta.loading;
-        this._roles = [role.client];
+        this._roles = [];
 
-        const response = await this._apiStore.request<role[]>( {
+        const response = await this._apiStore.request( {
             method: HTTPMethod.GET,
             endpoint: 'profile/roles',
             headers: {},
@@ -49,7 +49,11 @@ export default class RoleStore implements ILocalStore {
                 this._meta = Meta.error;
             }
             try {
-                this._roles = response.data;
+                const roles: role[] = [];
+                for (const item of response.data) {
+                    roles.push(item);
+                }
+                this._roles = roles;
                 this._meta = Meta.success;
                 return;
             } catch (e) {
@@ -62,6 +66,6 @@ export default class RoleStore implements ILocalStore {
     
     destroy(): void {
         this._meta = Meta.initial;
-        this._roles = [role.client];
+        this._roles = [];
     }
 }

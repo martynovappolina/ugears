@@ -11,7 +11,7 @@ const Header = () => {
         <div className={headerStyle.header}>
             <NavLink className={headerStyle.header__ugears} to={"/"}/>
             <NavLink className={headerStyle.header__link} style={{ textDecoration: 'none', color: 'black' }} to={"/products"}>Каталог</NavLink>
-            <div className={headerStyle.header__link}>Избранное</div>
+            <NavLink className={headerStyle.header__link} style={{ textDecoration: 'none', color: 'black' }} to={"/favorites"} >Избранное</NavLink>
             <NavLink className={headerStyle.header__link} style={{ textDecoration: 'none', color: 'black' }} to={"/cart"}>Корзина</NavLink>
             <div className={headerStyle.header__icons}>
                 <NavLink to={'/ask'} className={headerStyle.header__icon}><AskIcon /></NavLink>

@@ -1,0 +1,12 @@
+.fav {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    display: flex;
+    width: 200px;
+    height: 500px;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    transform: rotate(-90deg)
+}
